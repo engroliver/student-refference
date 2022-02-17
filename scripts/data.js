@@ -1,6 +1,6 @@
 async function loadHistoricSite(){
     let response = await axios.get('data/historic-sites-geojson.geojson');
-    let historicSiteGroup = L.layerGroup()
+    let historicSiteGroup = L.markerClusterGroup()
     L.geoJson(response.data, {
         'onEachFeature': function(feature, marker){
             marker.bindPopup(feature.properties.Description);
@@ -12,7 +12,7 @@ async function loadHistoricSite(){
 
 async function loadMonument(){
     let response = await axios.get('data/monuments-geojson.geojson');
-    let monumentGroup = L.layerGroup()
+    let monumentGroup = L.markerClusterGroup()
     L.geoJson(response.data, {
         'onEachFeature': function(feature, marker){
             marker.bindPopup(feature.properties.Description);
@@ -24,7 +24,7 @@ async function loadMonument(){
 
 async function loadMuseum(){
     let response = await axios.get('data/museums-geojson.geojson');
-    let museumGroup = L.layerGroup() 
+    let museumGroup = L.markerClusterGroup()
     L.geoJson(response.data, {
         'onEachFeature': function(feature, marker) {
             marker.bindPopup(feature.properties.Description);
@@ -38,12 +38,12 @@ window.addEventListener('DOMContentLoaded', async function(){
     // loadMuseum();
 
     let baseLayers = {
-
-    };
-    let overlays = {
         "Historic Sites": await loadHistoricSite(),
         "Monuments": await loadMonument(),
         "Museums": await loadMuseum(),
+    };
+    let overlays = {
+
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);
