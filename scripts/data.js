@@ -35,8 +35,6 @@ async function loadMuseum(){
 }
 
 window.addEventListener('DOMContentLoaded', async function(){   
-    // loadMuseum();
-
     let baseLayers = {
         "Historic Sites": await loadHistoricSite(),
         "Monuments": await loadMonument(),
