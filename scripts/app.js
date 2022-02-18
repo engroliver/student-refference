@@ -13,5 +13,6 @@ for (let link of navbarLinks) {
         let page = document.querySelector('#'+ pageName +'-page')
         page.classList.remove('hidden');
         page.classList.add('show');
+        page.clientWidth;
     })
 }
