@@ -3,53 +3,22 @@ async function getData(dataURL){
     return response.data
 }
 
-async function loadHistoricSite() {
-    let historicSiteData = await getData('data/historic-sites-geojson.geojson');
-    let historicSiteGroup = L.markerClusterGroup()
-    L.geoJson(historicSiteData, {
-        'onEachFeature': function (feature, marker) {
-            marker.bindPopup(feature.properties.Description)
-        },
-        'pointToLayer': function (feature, latlng) {
-            return L.marker(latlng, { icon: historicSiteIcon })
-        }
-    }).addTo(historicSiteGroup);
-historicSiteGroup.addTo(map);
-return historicSiteGroup;
-}
-
-async function loadMonument() {
-    let monumentData = await getData('data/monuments-geojson.geojson');
-    let monumentGroup = L.markerClusterGroup()
-    L.geoJson(monumentData, {
-        'onEachFeature': function (feature, marker) {
+async function loadGeoJSON(geoJSONFile, layerIcon){
+    let data = await getData(geoJSONFile);
+    let group = L.markerClusterGroup();
+    L.geoJson(data, {
+        'onEachFeature': function(feature, marker){
             marker.bindPopup(feature.properties.Description);
         },
         'pointToLayer': function (feature, latlng) {
-            return L.marker(latlng, { icon: monumentIcon })
+            return L.marker(latlng, { icon: layerIcon })
         }
-    }).addTo(monumentGroup);
-    monumentGroup.addTo(map)
-    return monumentGroup;
-}
-
-async function loadMuseum() {
-    let museumData = await getData('data/museums-geojson.geojson')
-    let museumGroup = L.markerClusterGroup()
-    L.geoJson(museumData, {
-        'onEachFeature': function (feature, marker) {
-            marker.bindPopup(feature.properties.Description);
-        },
-        'pointToLayer': function (feature, latlng) {
-            return L.marker(latlng, { icon: museumIcon })
-        }
-    }).addTo(museumGroup);
-    museumGroup.addTo(map)
-    return museumGroup
+    }).addTo(group);
+    group.addTo(map);
+    return group
 }
 
 async function loadWeather2H() {
-    // let response = await axios.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
     let weather2HData = await getData('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast')
     let weather2HGroup = L.markerClusterGroup();
     let weatherCoordinates = weather2HData.area_metadata;
@@ -73,14 +42,10 @@ async function loadWeather2H() {
 // }
 
 window.addEventListener('DOMContentLoaded', async function () {
-    // let museumLayer = await loadGeoJSON('data/museums-geojson.geojson');
-    // let monumentLayer = await loadGeoJSON('data/monuments-geojson.geojson');
-    // let historicSiteLayer = await loadGeoJSON('data/historic-sites-geojson.geojson');
-
     let baseLayers = {
-        "Historic Sites": await loadHistoricSite(), // historicSiteLayer
-        "Monuments": await loadMonument(), // monumentLayer
-        "Museums": await loadMuseum(), // museumLayer
+        "Historic Sites": await loadGeoJSON('data/historic-sites-geojson.geojson', historicSiteIcon),
+        "Monuments": await loadGeoJSON('data/monuments-geojson.geojson', monumentIcon),
+        "Museums":  await loadGeoJSON('data/museums-geojson.geojson', museumIcon),
     };
     let overlays = {
         "2h Weather Forecast": await loadWeather2H(),
