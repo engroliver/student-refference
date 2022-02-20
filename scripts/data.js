@@ -3,12 +3,23 @@ async function getData(dataURL){
     return response.data
 }
 
-async function loadGeoJSON(geoJSONFile, layerIcon){
+async function loadGeoJSON(geoJSONFile, layerIcon, nameColNo, descColNo, imgColNo){
     let data = await getData(geoJSONFile);
     let group = L.markerClusterGroup();
     L.geoJson(data, {
         'onEachFeature': function(feature, marker){
-            marker.bindPopup(feature.properties.Description);
+            // marker.bindPopup(feature.properties.Description);
+            let dummyDiv = document.createElement('div');
+            dummyDiv.innerHTML = feature.properties.Description;
+            let columns = dummyDiv.querySelectorAll('td');
+            let name = columns[nameColNo].innerHTML;
+            let desc = columns[descColNo].innerHTML;
+            let img = columns[imgColNo].innerHTML;
+            marker.bindPopup(`
+            <strong>Name of Location</strong>: ${name}
+            <p><strong>Description</strong>: ${desc}</p>
+            <img src="${img}" height='200px' display:block/>
+            `)
         },
         'pointToLayer': function (feature, latlng) {
             return L.marker(latlng, { icon: layerIcon })
@@ -43,9 +54,9 @@ async function loadWeather2H() {
 
 window.addEventListener('DOMContentLoaded', async function () {
     let baseLayers = {
-        "Historic Sites": await loadGeoJSON('data/historic-sites-geojson.geojson', historicSiteIcon),
-        "Monuments": await loadGeoJSON('data/monuments-geojson.geojson', monumentIcon),
-        "Museums":  await loadGeoJSON('data/museums-geojson.geojson', museumIcon),
+        "Historic Sites": await loadGeoJSON('data/historic-sites-geojson.geojson', historicSiteIcon, 4, 6, 3),
+        "Monuments": await loadGeoJSON('data/monuments-geojson.geojson', monumentIcon, 8, 14, 9),
+        "Museums":  await loadGeoJSON('data/museums-geojson.geojson', museumIcon, 9, 5, 10),
     };
     let overlays = {
         "2h Weather Forecast": await loadWeather2H(),

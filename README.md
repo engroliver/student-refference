@@ -17,3 +17,5 @@
 ## Value Added to Target Audience
 The Historic Sites Finder app aims to provide the location and information on all the historic sites and museums in Singapore on a map. The app will also allow users to check the 2h and 24h weather forecast, making it easy for users to plan a spontaneous or day trip on Singapore's history.
 
+## Credits
+1. Icons made by Freepik from www.flaticon.com

@@ -49,18 +49,36 @@
     <!-- start of main content -->
     <main id="all-pages">
         <!-- start of home page -->
-        <section id="home-page" class="page show">
+        <section id="home-page" class="page show container-fluid">
             <div id="home-page-content">
-                <div id="home-page-text" class="mx-auto top-50 start-50 translate-middle">
-                    <h5 class=>Random Historic Site</h5>
-                    <p class=>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dolorum repellendus
-                        saepe dolores consectetur nulla optio eius assumenda eaque ipsa atque, aperiam vel libero
-                        necessitatibus sunt reiciendis totam fugit voluptates.</p>
-                    <p>Pic URL here</p>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for sites"
-                            aria-label="Recipient's username with two button addons">
-                        <button class="btn btn-primary" type="button">Logo</button>
+                <div id="home-page-texts" class="mx-auto top-50 start-50 translate-middle">
+                    <div>
+                        <h5 class="text-header">Random Historic Site</h5>
+                        <p class="text-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dolorum
+                            repellendus
+                            saepe dolores consectetur nulla optio eius assumenda eaque ipsa atque, aperiam vel libero
+                            necessitatibus sunt reiciendis totam fugit voluptates.</p>
+                        <p>Pic URL here</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for historic sites">
+                            <button class="btn btn-primary" type="button">Icon</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="text-header">Random Monument Site</h5>
+                        <p class="text-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dolorum
+                            repellendus
+                            saepe dolores consectetur nulla optio eius assumenda eaque ipsa atque, aperiam vel libero
+                            necessitatibus sunt reiciendis totam fugit voluptates.</p>
+                        <p>Pic URL here</p>
+                    </div>
+                    <div>
+                        <h5 class="text-header">Random Historic Site</h5>
+                        <p class="text-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam dolorum
+                            repellendus
+                            saepe dolores consectetur nulla optio eius assumenda eaque ipsa atque, aperiam vel libero
+                            necessitatibus sunt reiciendis totam fugit voluptates.</p>
+                        <p>Pic URL here</p>
                     </div>
                 </div>
             </div>
@@ -68,8 +86,36 @@
         <!-- end of home page -->
 
         <!-- start of map page -->
-        <section id="map-page" class="page hidden">
-
+        <section id="map-page" class="page hidden container-fluid">
+            <div id="map"></div>
+            <div id="custom-layer-control" class="row">
+                <div id="radio-buttons" class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="site-radios" id="historic-site-radio"
+                            value="historic-site" checked>
+                        <label class="form-check-label">Historic Sites</label>
+                        <img src="images/icons/site.png" height="25px" width="25px"/>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="site-radios" id="monument-radio"
+                            value="monument">
+                        <label class="form-check-label">Monuments</label>
+                        <img src="images/icons/monument.png" height="25px" width="25px"/>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="site-radios" id="museum-radio"
+                            value="museum">
+                        <label class="form-check-label">Museums</label>
+                        <img src="images/icons/museum.png" height="25px" width="25px"/>
+                    </div>
+                </div>
+                <div id="checkboxes" class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="2h-weather-checkbox" value="2h-weather">
+                        <label class="form-check-label">2H Weather</label>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- end of map page -->
     </main>

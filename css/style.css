@@ -1,23 +1,38 @@
+#all-pages {
+    position: relative;
+}
+
 .page {
-    height: 100vh;
-    width: 100vw;
+    height: 92vh;
     box-sizing: border-box;
     position: absolute;
 }
 
-#all-pages {
-    position: relative;
+#map {
+    height: 90%;
+    /* padding-right: 0 !important;
+    padding-left: 0 !important; */
 }
 
 #home-page-cotent {
     position: relative;
 }
 
-#home-page-text {
+#home-page-texts {
     position: absolute;
     width: 50%;
     margin: 0 auto;
     text-align: justify;
+}
+
+#home-page-texts > div {
+    border: 5px dotted brown;
+    margin-top: 5px;
+}
+
+#custom-layer-control {
+    border: 5px dotted brown;
+    margin-top: 5px;
 }
 
 .show {
