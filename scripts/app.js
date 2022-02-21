@@ -21,17 +21,15 @@ for (let link of navbarLinks) {
 let radios = document.querySelectorAll('.site-radios');
 for (let radio of radios) {
     radio.addEventListener('change', function () {
+        map.removeLayer(randomMarker)
+        map.removeLayer(historicSiteLayer);
+        map.removeLayer(monumentLayer);
+        map.removeLayer(museumLayer);
         if (radio.value == 'historic-site') {
-            map.removeLayer(monumentLayer);
-            map.removeLayer(museumLayer);
             map.addLayer(historicSiteLayer);
         } else if (radio.value == 'monument') {
-            map.removeLayer(historicSiteLayer);
-            map.removeLayer(museumLayer);
             map.addLayer(monumentLayer);
         } else if (radio.value == 'museum') {
-            map.removeLayer(historicSiteLayer);
-            map.removeLayer(monumentLayer);
             map.addLayer(museumLayer);
         }
     })

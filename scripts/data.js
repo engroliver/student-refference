@@ -65,7 +65,9 @@ function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { //
     let headerElement = document.querySelector(`#random-${type}-header`);
     let contentElement = document.querySelector(`#random-${type}-content`);
     let imgElement = document.querySelector(`#random-${type}-img`);
-    let linkElement = document.querySelector((`#random-${type}-link`))
+    let linkElement = document.querySelector((`#random-${type}-link`));
+    let lat = data.features[randomInt].geometry.coordinates[1];
+    let lng = data.features[randomInt].geometry.coordinates[0];
 
     let dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = data.features[randomInt].properties.Description;
@@ -83,12 +85,32 @@ function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { //
         let homePage = document.querySelector('#home-page')
         let mapPage = document.querySelector('#map-page')
 
+        // transition to map page
         homePage.classList.remove('show');
         homePage.classList.add('hidden');
         mapPage.classList.remove('hidden');
         mapPage.classList.add('show');
-
-
+        
+        // remove initial all layer and uncheck all radio
+        if (randomMarker) {
+            map.removeLayer(randomMarker)
+        }
+        map.removeLayer(historicSiteLayer);
+        map.removeLayer(monumentLayer);
+        map.removeLayer(museumLayer);
+        let radios = document.querySelectorAll('.site-radios');
+        for (let radio of radios) {
+            radio.checked = false
+        }
+        // flyto map and bind popup
+        map.flyTo([lat, lng], 16)
+        randomMarker = L.marker([lat, lng], { icon: randomIcon });
+        randomMarker.bindPopup(`
+        <p><strong>${name}</strong></p>
+        <p>${desc}</p>
+        <img src="${img}" height='200px' display:block/>
+        `)
+        randomMarker.addTo(map)
     })
 }
 
@@ -102,6 +124,7 @@ let historicSiteLayer;
 let monumentLayer;
 let museumLayer;
 let weather2hLayer;
+let randomMarker;
 
 window.addEventListener('DOMContentLoaded', async function () {
     let historicSiteReq = axios.get('data/historic-sites-geojson.geojson');
