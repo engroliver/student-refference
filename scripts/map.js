@@ -24,3 +24,9 @@ const museumIcon = L.icon({
     iconUrl: './images/icons/museum.png',
     iconSize: [45, 45],
 })
+
+//placeholder weather icon
+const weatherIcon = L.icon({
+    iconUrl: './images/icons/weather.png',
+    iconSize: [40, 40],
+})
