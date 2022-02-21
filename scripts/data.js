@@ -3,7 +3,7 @@ async function getData(dataURL) {
     return response.data
 }
 
-// function to obtain marker layer
+// function to generate marker layer
 function loadGeoJsonLayer(data, layerIcon, nameColNo, descColNo, imgColNo) {
     // let data = await getData(geoJSONFile);
     let group = L.markerClusterGroup();
@@ -17,8 +17,8 @@ function loadGeoJsonLayer(data, layerIcon, nameColNo, descColNo, imgColNo) {
             let desc = columns[descColNo].innerHTML;
             let img = columns[imgColNo].innerHTML;
             marker.bindPopup(`
-            <p><strong>Name of Location</strong>: ${name}</p>
-            <p><strong>Description</strong>: ${desc}</p>
+            <p><strong>${name}</strong></p>
+            <p>${desc}</p>
             <img src="${img}" height='200px' display:block/>
             `)
         },
@@ -52,6 +52,46 @@ function loadWeather2h(data) {
 //     let weatherForecast = response.data.items[0].general
 // }
 
+// function for random int to get random location from data
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+// function to get random location from data
+function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { // 
+    let randomInt = getRandomInt(0, data.features.length);
+    let headerElement = document.querySelector(`#random-${type}-header`);
+    let contentElement = document.querySelector(`#random-${type}-content`);
+    let imgElement = document.querySelector(`#random-${type}-img`);
+    let linkElement = document.querySelector((`#random-${type}-link`))
+
+    let dummyDiv = document.createElement('div');
+    dummyDiv.innerHTML = data.features[randomInt].properties.Description;
+    let columns = dummyDiv.querySelectorAll('td');
+    let name = columns[nameColNo].innerHTML;
+    let desc = columns[descColNo].innerHTML;
+    let img = columns[imgColNo].innerHTML;
+
+    headerElement.innerText = name
+    contentElement.innerText = desc
+    imgElement.src = img
+
+    // function (eventlistener) to fly to selected point
+    linkElement.addEventListener('click', function(){
+        let homePage = document.querySelector('#home-page')
+        let mapPage = document.querySelector('#map-page')
+
+        homePage.classList.remove('show');
+        homePage.classList.add('hidden');
+        mapPage.classList.remove('hidden');
+        mapPage.classList.add('show');
+
+
+    })
+}
+
 // defining variables, loading data and adding layers to map
 let historicSiteData;
 let monumentData;
@@ -83,4 +123,8 @@ window.addEventListener('DOMContentLoaded', async function () {
     monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, 8, 14, 9);
     museumLayer = loadGeoJsonLayer(museumData, museumIcon, 9, 5, 10);
     weather2hLayer = loadWeather2h(weather2hData);
+
+    getRandomLocation(historicSiteData, 4, 6, 3, "site")
+    getRandomLocation(monumentData, 8, 14, 9, "monument")
+    getRandomLocation(museumData, 9, 5, 10, "museum") 
 })

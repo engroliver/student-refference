@@ -1,8 +1,7 @@
 // function for single page application
 let navbarLinks = document.querySelectorAll('.navbar-nav > .nav-link')
-
 for (let link of navbarLinks) {
-    link.addEventListener('click', function(event){
+    link.addEventListener('click', function (event) {
         let selectedLink = event.target;
         let pageName = selectedLink.dataset.page;
 
@@ -11,7 +10,7 @@ for (let link of navbarLinks) {
             p.classList.remove('show');
             p.classList.add('hidden');
         }
-        let page = document.querySelector('#'+ pageName +'-page')
+        let page = document.querySelector('#' + pageName + '-page')
         page.classList.remove('hidden');
         page.classList.add('show');
         page.clientWidth;
@@ -20,9 +19,8 @@ for (let link of navbarLinks) {
 
 // function for sites layers control using radio buttons
 let radios = document.querySelectorAll('.site-radios');
-
 for (let radio of radios) {
-    radio.addEventListener('change', function() {
+    radio.addEventListener('change', function () {
         if (radio.value == 'historic-site') {
             map.removeLayer(monumentLayer);
             map.removeLayer(museumLayer);
@@ -41,7 +39,7 @@ for (let radio of radios) {
 
 // function for weather layers control using checkboxes
 let checkbox = document.querySelector('.weather-checkbox');
-checkbox.addEventListener('change', function(){
+checkbox.addEventListener('change', function () {
     if (this.checked) {
         map.addLayer(weather2hLayer)
     } else {
