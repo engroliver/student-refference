@@ -21,7 +21,9 @@ for (let link of navbarLinks) {
 let radios = document.querySelectorAll('.site-radios');
 for (let radio of radios) {
     radio.addEventListener('change', function () {
-        map.removeLayer(randomMarker)
+        if (randomMarker) {
+            map.removeLayer(randomMarker)
+        }
         map.removeLayer(historicSiteLayer);
         map.removeLayer(monumentLayer);
         map.removeLayer(museumLayer);

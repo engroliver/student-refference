@@ -35,3 +35,15 @@ const weatherIcon = L.icon({
     iconUrl: './images/icons/weather.png',
     iconSize: [40, 40],
 })
+
+// weather icons
+// const weatherIcons = {
+//     'Partly Cloudy (Day)': , //valid but have to access using object.['key name']
+//     'Rain'
+//     'Showers'
+//     'Thundery showers'
+//     'Fair'
+//     'Hazy'
+//     'Cloudy'
+//     'Overcast'
+// }
