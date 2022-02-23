@@ -35,6 +35,17 @@
     box-sizing: border-box;
 }
 
+#map-container {
+    position: relative;
+}
+
+#search-container {
+    position: absolute;
+    top: 12px;
+    left: 50px;
+    z-index: 314159;
+}
+
 .col {
     box-sizing: border-box;
     border: 5px dotted brown;

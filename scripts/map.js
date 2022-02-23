@@ -36,14 +36,17 @@ const weatherIcon = L.icon({
     iconSize: [40, 40],
 })
 
-// weather icons
+// weather icons. if don't meet any of the weather forecast below. default to cloudy
 // const weatherIcons = {
-//     'Partly Cloudy (Day)': , //valid but have to access using object.['key name']
-//     'Rain'
-//     'Showers'
-//     'Thundery showers'
-//     'Fair'
-//     'Hazy'
-//     'Cloudy'
-//     'Overcast'
+//     "Fair & Warm" //valid but have to access using object.['key name']
+//     "Fair (Day)"
+//     "Partly Cloudy (Day)""
+//     "Cloudy"
+//     "Partly Cloudy (Night)"
+//     "Light Showers"
+//     "Light Rain"
+//     "Moderate Rain"
+//     "Showers"
+//     "Thundery Showers"
+//     "Heavy Thundery Showers"
 // }

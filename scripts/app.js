@@ -21,12 +21,7 @@ for (let link of navbarLinks) {
 let radios = document.querySelectorAll('.site-radios');
 for (let radio of radios) {
     radio.addEventListener('change', function () {
-        if (randomMarker) {
-            map.removeLayer(randomMarker)
-        }
-        map.removeLayer(historicSiteLayer);
-        map.removeLayer(monumentLayer);
-        map.removeLayer(museumLayer);
+        clearAllLayers()
         if (radio.value == 'historic-site') {
             map.addLayer(historicSiteLayer);
         } else if (radio.value == 'monument') {
@@ -46,3 +41,10 @@ checkbox.addEventListener('change', function () {
         map.removeLayer(weather2hLayer)
     }
 })
+
+// function to search for sites
+// let searchInput = document.querySelector('#search-input');
+// let searchBtn = document.querySelector('#search-btn')
+// searchBtn.addEventListener('click', function(){
+//     console.log(searchInput.value)
+// })

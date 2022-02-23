@@ -3,8 +3,17 @@ async function getData(dataURL) {
     return response.data
 }
 
+function clearAllLayers() {
+    if (randomMarker) {
+        map.removeLayer(randomMarker)
+    }
+    map.removeLayer(historicSiteLayer);
+    map.removeLayer(monumentLayer);
+    map.removeLayer(museumLayer);
+}
+
 // function to generate marker layer
-function loadGeoJsonLayer(data, layerIcon, nameColNo, descColNo, imgColNo) {
+function loadGeoJsonLayer(data, layerIcon, colNoArray) {
     // let data = await getData(geoJSONFile);
     let group = L.markerClusterGroup();
     L.geoJson(data, {
@@ -13,9 +22,9 @@ function loadGeoJsonLayer(data, layerIcon, nameColNo, descColNo, imgColNo) {
             let dummyDiv = document.createElement('div');
             dummyDiv.innerHTML = feature.properties.Description;
             let columns = dummyDiv.querySelectorAll('td');
-            let name = columns[nameColNo].innerHTML;
-            let desc = columns[descColNo].innerHTML;
-            let img = columns[imgColNo].innerHTML;
+            let name = columns[colNoArray[0]].innerHTML;
+            let desc = columns[colNoArray[1]].innerHTML;
+            let img = columns[colNoArray[2]].innerHTML;
             marker.bindPopup(`
             <p><strong>${name}</strong></p>
             <p>${desc}</p>
@@ -30,7 +39,7 @@ function loadGeoJsonLayer(data, layerIcon, nameColNo, descColNo, imgColNo) {
 }
 
 // function to load 2h weather data
-function loadWeather2h(data) {
+function loadWeather2hLayer(data) {
     // let data = await getData('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast')
     let group = L.markerClusterGroup();
     let coordinates = data.area_metadata;
@@ -60,7 +69,7 @@ function getRandomInt(min, max) {
 }
 
 // function to get random location from data
-function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { // 
+function getRandomLocation(data, colNoArray, type) { // 
     let randomInt = getRandomInt(0, data.features.length);
     let headerElement = document.querySelector(`#random-${type}-header`);
     let contentElement = document.querySelector(`#random-${type}-content`);
@@ -72,9 +81,9 @@ function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { //
     let dummyDiv = document.createElement('div');
     dummyDiv.innerHTML = data.features[randomInt].properties.Description;
     let columns = dummyDiv.querySelectorAll('td');
-    let name = columns[nameColNo].innerHTML;
-    let desc = columns[descColNo].innerHTML;
-    let img = columns[imgColNo].innerHTML;
+    let name = columns[colNoArray[0]].innerHTML;
+    let desc = columns[colNoArray[1]].innerHTML;
+    let img = columns[colNoArray[2]].innerHTML;
 
     headerElement.innerText = name
     contentElement.innerText = desc
@@ -92,12 +101,7 @@ function getRandomLocation(data, nameColNo, descColNo, imgColNo, type) { //
         mapPage.classList.add('show');
         
         // remove initial all layer and uncheck all radio
-        if (randomMarker) {
-            map.removeLayer(randomMarker)
-        }
-        map.removeLayer(historicSiteLayer);
-        map.removeLayer(monumentLayer);
-        map.removeLayer(museumLayer);
+        clearAllLayers()
         let radios = document.querySelectorAll('.site-radios');
         for (let radio of radios) {
             radio.checked = false
@@ -126,6 +130,12 @@ let museumLayer;
 let weather2hLayer;
 let randomMarker;
 
+let nameDescImgCol = {
+    historic: [4, 6, 3],
+    monument: [8, 14, 9],
+    museum: [9, 5, 10],
+}
+
 window.addEventListener('DOMContentLoaded', async function () {
     let historicSiteReq = axios.get('data/historic-sites-geojson.geojson');
     let monumentReq = axios.get('data/monuments-geojson.geojson');
@@ -142,12 +152,12 @@ window.addEventListener('DOMContentLoaded', async function () {
     museumData = museumRes.data;
     weather2hData = weather2hRes.data;
 
-    historicSiteLayer = loadGeoJsonLayer(historicSiteData, historicSiteIcon, 4, 6, 3).addTo(map);
-    monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, 8, 14, 9);
-    museumLayer = loadGeoJsonLayer(museumData, museumIcon, 9, 5, 10);
-    weather2hLayer = loadWeather2h(weather2hData);
+    historicSiteLayer = loadGeoJsonLayer(historicSiteData, historicSiteIcon, nameDescImgCol.historic).addTo(map);
+    monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, nameDescImgCol.monument);
+    museumLayer = loadGeoJsonLayer(museumData, museumIcon, nameDescImgCol.museum);
+    weather2hLayer = loadWeather2hLayer(weather2hData);
 
-    getRandomLocation(historicSiteData, 4, 6, 3, "site")
-    getRandomLocation(monumentData, 8, 14, 9, "monument")
-    getRandomLocation(museumData, 9, 5, 10, "museum") 
+    getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
+    getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
+    getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
 })
