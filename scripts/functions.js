@@ -3,6 +3,7 @@ async function getData(dataURL) {
     return response.data
 }
 
+// function to clear all existing layers on map
 function clearAllLayers() {
     if (randomMarker) {
         map.removeLayer(randomMarker)
@@ -38,7 +39,7 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
     return group
 }
 
-// function to load 2h weather data
+// function to generate 2h weather layer
 function loadWeather2hLayer(data) {
     // let data = await getData('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast')
     let group = L.markerClusterGroup();
@@ -68,7 +69,18 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
-// function to get random location from data
+function flyToAndPopup(coord, icon, name, desc, img){
+    map.flyTo(coord, 16);
+    randomMarker = L.marker(coord, {icon: icon});
+    randomMarker.bindPopup(`
+    <p><strong>${name}</strong></p>
+    <p>${desc}</p>
+    <img src="${img}" height='200px' display:block/>
+    `)
+    randomMarker.addTo(map)
+}
+
+// function to get random location from data, and append link to map on button
 function getRandomLocation(data, colNoArray, type) { // 
     let randomInt = getRandomInt(0, data.features.length);
     let headerElement = document.querySelector(`#random-${type}-header`);
@@ -106,58 +118,7 @@ function getRandomLocation(data, colNoArray, type) { //
         for (let radio of radios) {
             radio.checked = false
         }
-        // flyto map and bind popup
-        map.flyTo([lat, lng], 16)
-        randomMarker = L.marker([lat, lng], { icon: randomIcon });
-        randomMarker.bindPopup(`
-        <p><strong>${name}</strong></p>
-        <p>${desc}</p>
-        <img src="${img}" height='200px' display:block/>
-        `)
-        randomMarker.addTo(map)
+
+        flyToAndPopup([lat, lng], randomIcon, name, desc, img)
     })
 }
-
-// defining variables, loading data and adding layers to map
-let historicSiteData;
-let monumentData;
-let museumData;
-let weather2hData;
-
-let historicSiteLayer;
-let monumentLayer;
-let museumLayer;
-let weather2hLayer;
-let randomMarker;
-
-let nameDescImgCol = {
-    historic: [4, 6, 3],
-    monument: [8, 14, 9],
-    museum: [9, 5, 10],
-}
-
-window.addEventListener('DOMContentLoaded', async function () {
-    let historicSiteReq = axios.get('data/historic-sites-geojson.geojson');
-    let monumentReq = axios.get('data/monuments-geojson.geojson');
-    let museumReq = axios.get('data/museums-geojson.geojson');
-    let weatherReq = axios.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
-
-    let historicSiteRes = await historicSiteReq;
-    let monumentRes = await monumentReq;
-    let museumRes = await museumReq;
-    let weather2hRes = await weatherReq;
-
-    historicSiteData = historicSiteRes.data;
-    monumentData = monumentRes.data;
-    museumData = museumRes.data;
-    weather2hData = weather2hRes.data;
-
-    historicSiteLayer = loadGeoJsonLayer(historicSiteData, historicSiteIcon, nameDescImgCol.historic).addTo(map);
-    monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, nameDescImgCol.monument);
-    museumLayer = loadGeoJsonLayer(museumData, museumIcon, nameDescImgCol.museum);
-    weather2hLayer = loadWeather2hLayer(weather2hData);
-
-    getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
-    getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
-    getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
-})

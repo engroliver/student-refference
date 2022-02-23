@@ -1,4 +1,50 @@
-// function for single page application
+// defining variables
+let historicSiteData;
+let monumentData;
+let museumData;
+let weather2hData;
+
+let historicSiteLayer;
+let monumentLayer;
+let museumLayer;
+let weather2hLayer;
+let randomMarker;
+
+// the col number is based on table data from the geojson file
+let nameDescImgCol = {
+    historic: [4, 6, 3],
+    monument: [8, 14, 9],
+    museum: [9, 5, 10],
+}
+
+// loading data and adding layers to map
+window.addEventListener('DOMContentLoaded', async function () {
+    let historicSiteReq = axios.get('data/historic-sites-geojson.geojson');
+    let monumentReq = axios.get('data/monuments-geojson.geojson');
+    let museumReq = axios.get('data/museums-geojson.geojson');
+    let weatherReq = axios.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
+
+    let historicSiteRes = await historicSiteReq;
+    let monumentRes = await monumentReq;
+    let museumRes = await museumReq;
+    let weather2hRes = await weatherReq;
+
+    historicSiteData = historicSiteRes.data;
+    monumentData = monumentRes.data;
+    museumData = museumRes.data;
+    weather2hData = weather2hRes.data;
+
+    historicSiteLayer = loadGeoJsonLayer(historicSiteData, historicSiteIcon, nameDescImgCol.historic).addTo(map);
+    monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, nameDescImgCol.monument);
+    museumLayer = loadGeoJsonLayer(museumData, museumIcon, nameDescImgCol.museum);
+    weather2hLayer = loadWeather2hLayer(weather2hData);
+
+    getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
+    getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
+    getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
+})
+
+// event listener for single page application
 let navbarLinks = document.querySelectorAll('.navbar-nav > .nav-link')
 for (let link of navbarLinks) {
     link.addEventListener('click', function (event) {
@@ -17,7 +63,7 @@ for (let link of navbarLinks) {
     })
 }
 
-// function for sites layers control using radio buttons
+// event listener for sites layers control using radio buttons
 let radios = document.querySelectorAll('.site-radios');
 for (let radio of radios) {
     radio.addEventListener('change', function () {
@@ -32,7 +78,7 @@ for (let radio of radios) {
     })
 }
 
-// function for weather layers control using checkboxes
+// event listener for weather layers control using checkboxes
 let checkbox = document.querySelector('.weather-checkbox');
 checkbox.addEventListener('change', function () {
     if (this.checked) {
