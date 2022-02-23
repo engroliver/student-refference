@@ -41,7 +41,6 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
 
 // function to generate 2h weather layer
 function loadWeather2hLayer(data) {
-    // let data = await getData('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast')
     let group = L.markerClusterGroup();
     let coordinates = data.area_metadata;
     let forecast = data.items[0].forecasts;
@@ -57,10 +56,14 @@ function loadWeather2hLayer(data) {
 }
 
 // 24h data do not need to be plotted on to map
-// async function loadWeather24H(){
-//     let response = await axios.get('https://api.data.gov.sg/v1/environment/24-hour-weather-forecast');
-//     let weatherForecast = response.data.items[0].general
-// }
+async function loadWeather24H(data){
+    let weather24h = data.items[0].general
+    let forecast = weather24h.forecast
+    let temp = weather24h.temperature
+
+    document.querySelector('#forecast-24h').innerHTML = `${forecast}`
+    document.querySelector('#temp-24h').innerHTML = `${temp.low}°C / ${temp.high}°C`
+}
 
 // function for random int to get random location from data
 function getRandomInt(min, max) {
@@ -80,6 +83,18 @@ function flyToAndPopup(coord, icon, name, desc, img){
     randomMarker.addTo(map)
 }
 
+// function to get description data from the table of a selected feature
+function getDescData(data, featureNo, colNoArray) {
+    let dummyDiv = document.createElement('div');
+    dummyDiv.innerHTML = data[featureNo].properties.Description;
+    let columns = dummyDiv.querySelectorAll('td');
+    let name = columns[colNoArray[0]].innerHTML;
+    let desc = columns[colNoArray[1]].innerHTML;
+    let img = columns[colNoArray[2]].innerHTML;
+
+    return [name, desc, img]
+}
+
 // function to get random location from data, and append link to map on button
 function getRandomLocation(data, colNoArray, type) { // 
     let randomInt = getRandomInt(0, data.features.length);
@@ -87,15 +102,12 @@ function getRandomLocation(data, colNoArray, type) { //
     let contentElement = document.querySelector(`#random-${type}-content`);
     let imgElement = document.querySelector(`#random-${type}-img`);
     let linkElement = document.querySelector((`#random-${type}-link`));
-    let lat = data.features[randomInt].geometry.coordinates[1];
-    let lng = data.features[randomInt].geometry.coordinates[0];
+    let dataFeatures = data.features
+    let lat = dataFeatures[randomInt].geometry.coordinates[1];
+    let lng = dataFeatures[randomInt].geometry.coordinates[0];
 
-    let dummyDiv = document.createElement('div');
-    dummyDiv.innerHTML = data.features[randomInt].properties.Description;
-    let columns = dummyDiv.querySelectorAll('td');
-    let name = columns[colNoArray[0]].innerHTML;
-    let desc = columns[colNoArray[1]].innerHTML;
-    let img = columns[colNoArray[2]].innerHTML;
+    // get description data from randomly selected location
+    let [name, desc, img] = getDescData(dataFeatures, randomInt, colNoArray)
 
     headerElement.innerText = name
     contentElement.innerText = desc
@@ -121,4 +133,28 @@ function getRandomLocation(data, colNoArray, type) { //
 
         flyToAndPopup([lat, lng], randomIcon, name, desc, img)
     })
+}
+
+// function to search for locations
+function searchLocations(searchTerm, resultsDisplay, data, colNoArray){
+    let resultsArr = data.features.filter(function(location){
+        return location.properties.Description.toLowerCase().includes(searchTerm)
+    })
+    for (let i = 0; i < resultsArr.length; i++) {
+        let [name, desc, img] = getDescData(resultsArr, i, colNoArray)
+        resultsDisplay.innerHTML += `<div>${name}</div>`
+    }
+}
+
+// function to display all search results
+function allSearchResults(){
+    let searchTerm = document.querySelector('#search-input').value.toLowerCase();
+    let resultsDisplay = document.querySelector('#search-results-display')
+    resultsDisplay.innerHTML = ""
+    // console.log(searchTerm)
+    if (searchTerm != "" && searchTerm != " ") {
+        searchLocations(searchTerm, resultsDisplay, historicSiteData, nameDescImgCol.historic)
+        searchLocations(searchTerm, resultsDisplay, monumentData, nameDescImgCol.monument)
+        searchLocations(searchTerm, resultsDisplay, museumData, nameDescImgCol.museum)
+}
 }

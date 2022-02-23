@@ -22,22 +22,26 @@ window.addEventListener('DOMContentLoaded', async function () {
     let historicSiteReq = axios.get('data/historic-sites-geojson.geojson');
     let monumentReq = axios.get('data/monuments-geojson.geojson');
     let museumReq = axios.get('data/museums-geojson.geojson');
-    let weatherReq = axios.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
+    let weather2hReq = axios.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
+    let weather24hReq = axios.get('https://api.data.gov.sg/v1/environment/24-hour-weather-forecast');
 
     let historicSiteRes = await historicSiteReq;
     let monumentRes = await monumentReq;
     let museumRes = await museumReq;
-    let weather2hRes = await weatherReq;
+    let weather2hRes = await weather2hReq;
+    let weather24hRes = await weather24hReq
 
     historicSiteData = historicSiteRes.data;
     monumentData = monumentRes.data;
     museumData = museumRes.data;
     weather2hData = weather2hRes.data;
+    weather24hData = weather24hRes.data;
 
     historicSiteLayer = loadGeoJsonLayer(historicSiteData, historicSiteIcon, nameDescImgCol.historic).addTo(map);
     monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, nameDescImgCol.monument);
     museumLayer = loadGeoJsonLayer(museumData, museumIcon, nameDescImgCol.museum);
     weather2hLayer = loadWeather2hLayer(weather2hData);
+    loadWeather24H(weather24hData)
 
     getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
     getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
@@ -88,9 +92,6 @@ checkbox.addEventListener('change', function () {
     }
 })
 
-// function to search for sites
-// let searchInput = document.querySelector('#search-input');
-// let searchBtn = document.querySelector('#search-btn')
-// searchBtn.addEventListener('click', function(){
-//     console.log(searchInput.value)
-// })
+// event listener to search
+let searchBtn = document.querySelector('#search-btn')
+searchBtn.addEventListener('click', allSearchResults)
