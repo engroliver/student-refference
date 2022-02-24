@@ -142,7 +142,7 @@ function searchLocations(searchTerm, resultsDisplay, data, colNoArray){
     })
     for (let i = 0; i < resultsArr.length; i++) {
         let [name, desc, img] = getDescData(resultsArr, i, colNoArray)
-        resultsDisplay.innerHTML += `<div>${name}</div>`
+        resultsDisplay.innerHTML += `<div><a href="#">${name}</a></div>`
     }
 }
 
@@ -150,11 +150,19 @@ function searchLocations(searchTerm, resultsDisplay, data, colNoArray){
 function allSearchResults(){
     let searchTerm = document.querySelector('#search-input').value.toLowerCase();
     let resultsDisplay = document.querySelector('#search-results-display')
+    let invisibleLayer = document.querySelector('#invisible-container')
+
+    invisibleLayer.style.display = 'block'
     resultsDisplay.innerHTML = ""
     // console.log(searchTerm)
     if (searchTerm != "" && searchTerm != " ") {
         searchLocations(searchTerm, resultsDisplay, historicSiteData, nameDescImgCol.historic)
         searchLocations(searchTerm, resultsDisplay, monumentData, nameDescImgCol.monument)
         searchLocations(searchTerm, resultsDisplay, museumData, nameDescImgCol.museum)
-}
+    }
+
+    invisibleLayer.addEventListener('click', function(){
+        resultsDisplay.innerHTML = ""
+        invisibleLayer.style.display = 'none'
+    })
 }

@@ -36,7 +36,18 @@
     position: absolute;
     top: 12px;
     left: 50px;
+    z-index: 314160;
+}
+
+#invisible-container {
+    position: absolute;
+    height: 70vh;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(255, 255, 255, 0);
     z-index: 314159;
+    display: none;
 }
 
 .box {

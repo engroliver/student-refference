@@ -36,6 +36,48 @@ const weatherIcon = L.icon({
     iconSize: [40, 40],
 })
 
+// "Fair & Warm" "Fair (Day)" icon
+const sunnyIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Cloudy" icon. Default icon (if cannot find in dict, default to this) 
+const cloudyIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Partly Cloudy (Day)" icon
+const cloudyDayIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Partly Cloudy (Night)" icon
+const cloudyNightIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Light Showers" "Light Rain" "Moderate Rain" icon
+const lightRainIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Showers" icon
+const rainIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
+// "Thundery Showers" "Heavy Thundery Showers" icon
+const thunderIcon = L.icon({
+    iconUrl: '',
+    iconSize: [40, 40],
+})
+
 // weather icons. if don't meet any of the weather forecast below. default to cloudy
 // const weatherIcons = {
 //     "Fair & Warm" //valid but have to access using object.['key name']
