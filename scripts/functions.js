@@ -5,12 +5,17 @@ async function getData(dataURL) {
 
 // function to clear all existing layers on map
 function clearAllLayers() {
-    if (randomMarker) {
-        map.removeLayer(randomMarker)
+    if (singleMarker) {
+        map.removeLayer(singleMarker)
     }
     map.removeLayer(historicSiteLayer);
     map.removeLayer(monumentLayer);
     map.removeLayer(museumLayer);
+
+    let resultsDisplay = document.querySelector('#search-results-display')
+    let invisibleLayer = document.querySelector('#invisible-container')
+    resultsDisplay.innerHTML = ""
+    invisibleLayer.style.display = 'none'
 }
 
 // function to generate marker layer
@@ -29,7 +34,7 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
             marker.bindPopup(`
             <p><strong>${name}</strong></p>
             <p>${desc}</p>
-            <img src="${img}" height='200px' display:block/>
+            <img src="${img}" class="center" width='200px' display:block/>
             `)
         },
         'pointToLayer': function (feature, latlng) {
@@ -47,7 +52,7 @@ function loadWeather2hLayer(data) {
     for (let i = 0; i < coordinates.length; i++) {
         let lat = coordinates[i].label_location.latitude;
         let lng = coordinates[i].label_location.longitude;
-        let marker = L.marker([lat, lng], {icon: weatherIcon});
+        let marker = L.marker([lat, lng], { icon: weatherIcon });
         marker.bindPopup(`<p><strong>Area</strong>: ${forecast[i].area}</p>
                           <p><strong>Forecast</strong>: ${forecast[i].forecast}</p>`)
         marker.addTo(group);
@@ -56,7 +61,7 @@ function loadWeather2hLayer(data) {
 }
 
 // 24h data do not need to be plotted on to map
-async function loadWeather24H(data){
+async function loadWeather24H(data) {
     let weather24h = data.items[0].general
     let forecast = weather24h.forecast
     let temp = weather24h.temperature
@@ -72,15 +77,16 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
-function flyToAndPopup(coord, icon, name, desc, img){
+function flyToAndPopup(coord, icon, name, desc, img) {
     map.flyTo(coord, 16);
-    randomMarker = L.marker(coord, {icon: icon});
-    randomMarker.bindPopup(`
+    singleMarker = L.marker(coord, { icon: icon });
+    singleMarker.bindPopup(`
     <p><strong>${name}</strong></p>
     <p>${desc}</p>
-    <img src="${img}" height='200px' display:block/>
+    <img src="${img}" class="center" width='200px' display:block/>
     `)
-    randomMarker.addTo(map)
+    singleMarker.addTo(map)
+    singleMarker.openPopup()
 }
 
 // function to get description data from the table of a selected feature
@@ -114,7 +120,7 @@ function getRandomLocation(data, colNoArray, type) { //
     imgElement.src = img
 
     // function (eventlistener) to fly to selected point
-    linkElement.addEventListener('click', function(){
+    linkElement.addEventListener('click', function () {
         let homePage = document.querySelector('#home-page')
         let mapPage = document.querySelector('#map-page')
 
@@ -123,7 +129,7 @@ function getRandomLocation(data, colNoArray, type) { //
         homePage.classList.add('hidden');
         mapPage.classList.remove('hidden');
         mapPage.classList.add('show');
-        
+
         // remove initial all layer and uncheck all radio
         clearAllLayers()
         let radios = document.querySelectorAll('.site-radios');
@@ -135,33 +141,83 @@ function getRandomLocation(data, colNoArray, type) { //
     })
 }
 
-// function to search for locations
-function searchLocations(searchTerm, resultsDisplay, data, colNoArray){
-    let resultsArr = data.features.filter(function(location){
-        return location.properties.Description.toLowerCase().includes(searchTerm)
-    })
-    for (let i = 0; i < resultsArr.length; i++) {
-        let [name, desc, img] = getDescData(resultsArr, i, colNoArray)
-        resultsDisplay.innerHTML += `<div><a href="#">${name}</a></div>`
+
+// function for site layers control using radio buttons
+function siteLayersControl() {
+    clearAllLayers()
+    if (this.value == 'historic-site') {
+        map.addLayer(historicSiteLayer);
+    } else if (this.value == 'monument') {
+        map.addLayer(monumentLayer);
+    } else if (this.value == 'museum') {
+        map.addLayer(museumLayer);
     }
 }
 
+// function for weather layer control using checkboxes
+function weatherLayerControl() {
+    if (this.checked) {
+        map.addLayer(weather2hLayer)
+    } else {
+        map.removeLayer(weather2hLayer)
+    }
+}
+
+// function to search for locations
+function searchLocations(searchTerm, data, colNoArray) {
+    let cleanedResultsArr = [];
+    let resultsArr = data.features.filter(function (location) {
+        return location.properties.Description.toLowerCase().includes(searchTerm)
+    })
+
+    for (let i = 0; i < resultsArr.length; i++) {
+        let [name, desc, img] = getDescData(resultsArr, i, colNoArray)
+        let coord = [resultsArr[i].geometry.coordinates[1],
+                     resultsArr[i].geometry.coordinates[0]]
+        cleanedResultsArr.push([name, desc, img, coord])
+    }
+    return cleanedResultsArr
+}
+
 // function to display all search results
-function allSearchResults(){
+function displayAllSearchResults() {
     let searchTerm = document.querySelector('#search-input').value.toLowerCase();
     let resultsDisplay = document.querySelector('#search-results-display')
     let invisibleLayer = document.querySelector('#invisible-container')
+    let allResults;
 
-    invisibleLayer.style.display = 'block'
-    resultsDisplay.innerHTML = ""
     // console.log(searchTerm)
     if (searchTerm != "" && searchTerm != " ") {
-        searchLocations(searchTerm, resultsDisplay, historicSiteData, nameDescImgCol.historic)
-        searchLocations(searchTerm, resultsDisplay, monumentData, nameDescImgCol.monument)
-        searchLocations(searchTerm, resultsDisplay, museumData, nameDescImgCol.museum)
+        clearAllLayers()
+        invisibleLayer.style.display = 'block'
+        resultsDisplay.innerHTML = ""
+        allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
+                      ...searchLocations(searchTerm, monumentData, nameDescImgCol.monument),
+                      ...searchLocations(searchTerm, museumData, nameDescImgCol.museum)]
+
+        for (let i = 0; i < allResults.length; i++) {
+            let [name, desc, img, coord] = allResults[i]
+            resultsDisplay.innerHTML += `<div id="search-${i}"><a href="#">${name}</a></div>`
+            
+            // let searchElem = document.querySelector(`#search-${i}`)
+            // searchElem.addEventListener('click', function(){
+            //     console.log(name)
+            // })
+        }
+
+        for (let i = 0; i < allResults.length; i++) {
+            let [name, desc, img, coord] = allResults[i]
+            let searchElem = document.querySelector(`#search-${i}`)
+            searchElem.addEventListener('click', function(){
+                // console.log(name)
+                resultsDisplay.innerHTML = ""
+                invisibleLayer.style.display = 'none'
+                flyToAndPopup(coord, searchIcon, name, desc, img)
+            })
+        }
     }
 
-    invisibleLayer.addEventListener('click', function(){
+    invisibleLayer.addEventListener('click', function () {
         resultsDisplay.innerHTML = ""
         invisibleLayer.style.display = 'none'
     })

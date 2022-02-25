@@ -30,6 +30,11 @@ const randomIcon = L.icon({
     iconSize: [45, 45],
 })
 
+const searchIcon = L.icon({
+    iconUrl: './images/icons/star.png',
+    iconSize: [45, 45],
+})
+
 //placeholder weather icon
 const weatherIcon = L.icon({
     iconUrl: './images/icons/weather.png',

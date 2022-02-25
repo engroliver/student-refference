@@ -8,7 +8,7 @@ let historicSiteLayer;
 let monumentLayer;
 let museumLayer;
 let weather2hLayer;
-let randomMarker;
+let singleMarker;
 
 // the col number is based on table data from the geojson file
 let nameDescImgCol = {
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 // event listener for single page application
 let navbarLinks = document.querySelectorAll('.navbar-nav > .nav-link')
 for (let link of navbarLinks) {
-    link.addEventListener('click', function (event) {
+    link.addEventListener('click', function(event) {
         let selectedLink = event.target;
         let pageName = selectedLink.dataset.page;
 
@@ -70,28 +70,13 @@ for (let link of navbarLinks) {
 // event listener for sites layers control using radio buttons
 let radios = document.querySelectorAll('.site-radios');
 for (let radio of radios) {
-    radio.addEventListener('change', function () {
-        clearAllLayers()
-        if (radio.value == 'historic-site') {
-            map.addLayer(historicSiteLayer);
-        } else if (radio.value == 'monument') {
-            map.addLayer(monumentLayer);
-        } else if (radio.value == 'museum') {
-            map.addLayer(museumLayer);
-        }
-    })
+    radio.addEventListener('change', siteLayersControl)
 }
 
-// event listener for weather layers control using checkboxes
+// event listener for weather layer control using checkboxes
 let checkbox = document.querySelector('.weather-checkbox');
-checkbox.addEventListener('change', function () {
-    if (this.checked) {
-        map.addLayer(weather2hLayer)
-    } else {
-        map.removeLayer(weather2hLayer)
-    }
-})
+checkbox.addEventListener('change', weatherLayerControl)
 
-// event listener to search
+// event listener to display search results
 let searchBtn = document.querySelector('#search-btn')
-searchBtn.addEventListener('click', allSearchResults)
+searchBtn.addEventListener('click', displayAllSearchResults)

@@ -18,5 +18,6 @@
 The Historic Sites Finder app aims to provide the location and information on all the historic sites and museums in Singapore on a map. The app will also allow users to check the 2h and 24h weather forecast, making it easy for users to plan a spontaneous or day trip on Singapore's history.
 
 ## Credits
-1. Icons made by Freepik and Pixel perfect from www.flaticon.com
-2. Data sources from www.data.gov.sg
+1. Data sources from www.data.gov.sg
+2. Icons made by Freepik and Pixel perfect from www.flaticon.com
+3. Background image - The Miriam and Ira D. Wallach Division of Art, Prints and Photographs: Picture Collection, The New York Public Library. "Singapore River, Singapore." New York Public Library Digital Collections. Accessed February 25, 2022. https://digitalcollections.nypl.org/items/c2634d03-2488-f238-e040-e00a18061845

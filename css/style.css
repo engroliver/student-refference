@@ -2,16 +2,26 @@
     position: relative;
 }
 
+.navbar {
+    background-color: #342A1E !important;
+}
+
 .page {
     /* height: 92vh; */
     box-sizing: border-box;
     position: absolute;
+    background-color: #ece0d5;
 }
 
 /* height to be adjusted */
 #map {
     height: 70vh;
 }
+
+/* image from root might have white spaces, might not be a good idea to have an image background */
+/* #home-page {
+    background-image: url('../images/singapore-river.jpg');
+} */
 
 #home-page-texts {
     text-align: justify;
@@ -75,3 +85,9 @@
     transition: transform 1s;
     visibility: hidden;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
