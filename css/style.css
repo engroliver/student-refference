@@ -2,26 +2,17 @@
     position: relative;
 }
 
-.navbar {
-    background-color: #342A1E !important;
+i {
+    color: #A63700;
+    margin: 5px 0px;
 }
 
 .page {
-    /* height: 92vh; */
+    height: 100vh;
     box-sizing: border-box;
     position: absolute;
-    background-color: #ece0d5;
+    /* background-color: #A89083; */
 }
-
-/* height to be adjusted */
-#map {
-    height: 70vh;
-}
-
-/* image from root might have white spaces, might not be a good idea to have an image background */
-/* #home-page {
-    background-image: url('../images/singapore-river.jpg');
-} */
 
 #home-page-texts {
     text-align: justify;
@@ -34,13 +25,22 @@
     margin-top: 5px;
 }
 
-/* #custom-layer-control {
-    box-sizing: border-box;
-} */
+.card-img-top {
+    width: 70%;
+}
 
 #map-container {
     position: relative;
 }
+
+/* height to be adjusted */
+#map {
+    height: 70vh;
+}
+
+/* #custom-layer-control {
+    box-sizing: border-box;
+} */
 
 #search-container {
     position: absolute;
@@ -62,7 +62,7 @@
 
 .box {
     box-sizing: border-box;
-    border: 3px dotted brown;
+    border: 3px dotted #A63700;
     margin: 3px;
     padding: 5px;
 }

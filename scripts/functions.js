@@ -52,7 +52,12 @@ function loadWeather2hLayer(data) {
     for (let i = 0; i < coordinates.length; i++) {
         let lat = coordinates[i].label_location.latitude;
         let lng = coordinates[i].label_location.longitude;
-        let marker = L.marker([lat, lng], { icon: weatherIcon });
+        let marker;
+        if (weatherIcons[forecast[i].forecast]) {
+            marker = L.marker([lat, lng], { icon: weatherIcons[forecast[i].forecast] });
+        } else {
+            marker = L.marker([lat, lng], { icon: cloudyIcon });
+        }
         marker.bindPopup(`<p><strong>Area</strong>: ${forecast[i].area}</p>
                           <p><strong>Forecast</strong>: ${forecast[i].forecast}</p>`)
         marker.addTo(group);
@@ -66,8 +71,12 @@ async function loadWeather24H(data) {
     let forecast = weather24h.forecast
     let temp = weather24h.temperature
 
-    document.querySelector('#forecast-24h').innerHTML = `${forecast}`
-    document.querySelector('#temp-24h').innerHTML = `${temp.low}°C / ${temp.high}°C`
+    document.querySelector('#forecast-24h').innerHTML = 
+        `${forecast}<br>
+         <img src="${weatherIcons[forecast].options.iconUrl}" width="20%">`
+    document.querySelector('#temp-24h').innerHTML = 
+        `${temp.low}°C <i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> / 
+         ${temp.high}°C <i class="fa-solid fa-temperature-high" style="color: indianred"></i>`
 }
 
 // function for random int to get random location from data
@@ -78,7 +87,7 @@ function getRandomInt(min, max) {
 }
 
 function flyToAndPopup(coord, icon, name, desc, img) {
-    map.flyTo(coord, 16);
+    map.flyTo([coord[0] + 0.004, coord[1]], 16);
     singleMarker = L.marker(coord, { icon: icon });
     singleMarker.bindPopup(`
     <p><strong>${name}</strong></p>
@@ -98,7 +107,9 @@ function getDescData(data, featureNo, colNoArray) {
     let desc = columns[colNoArray[1]].innerHTML;
     let img = columns[colNoArray[2]].innerHTML;
 
-    return [name, desc, img]
+    return {name: name, 
+            desc: desc, 
+            img: img}
 }
 
 // function to get random location from data, and append link to map on button
@@ -113,7 +124,7 @@ function getRandomLocation(data, colNoArray, type) { //
     let lng = dataFeatures[randomInt].geometry.coordinates[0];
 
     // get description data from randomly selected location
-    let [name, desc, img] = getDescData(dataFeatures, randomInt, colNoArray)
+    let {name, desc, img} = getDescData(dataFeatures, randomInt, colNoArray)
 
     headerElement.innerText = name
     contentElement.innerText = desc
@@ -165,18 +176,18 @@ function weatherLayerControl() {
 
 // function to search for locations
 function searchLocations(searchTerm, data, colNoArray) {
-    let cleanedResultsArr = [];
-    let resultsArr = data.features.filter(function (location) {
-        return location.properties.Description.toLowerCase().includes(searchTerm)
-    })
-
-    for (let i = 0; i < resultsArr.length; i++) {
-        let [name, desc, img] = getDescData(resultsArr, i, colNoArray)
-        let coord = [resultsArr[i].geometry.coordinates[1],
-                     resultsArr[i].geometry.coordinates[0]]
-        cleanedResultsArr.push([name, desc, img, coord])
+    let transformedArr = [];
+    let dataFeatures = data.features
+    for (let i = 0; i < dataFeatures.length; i++) {
+        let {name, desc, img} = getDescData(dataFeatures, i, colNoArray);
+        let coord = [dataFeatures[i].geometry.coordinates[1],
+                     dataFeatures[i].geometry.coordinates[0]]
+        transformedArr.push([name, desc, img, coord])
     }
-    return cleanedResultsArr
+    let resultsArr = transformedArr.filter(function (location) {
+        return location[0].toLowerCase().includes(searchTerm)
+    })
+    return resultsArr
 }
 
 // function to display all search results

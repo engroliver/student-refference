@@ -35,65 +35,53 @@ const searchIcon = L.icon({
     iconSize: [45, 45],
 })
 
-//placeholder weather icon
-const weatherIcon = L.icon({
-    iconUrl: './images/icons/weather.png',
-    iconSize: [40, 40],
-})
-
 // "Fair & Warm" "Fair (Day)" icon
 const sunnyIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/sun.png',
     iconSize: [40, 40],
 })
 
 // "Cloudy" icon. Default icon (if cannot find in dict, default to this) 
 const cloudyIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/cloudy.png',
     iconSize: [40, 40],
 })
 
 // "Partly Cloudy (Day)" icon
 const cloudyDayIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/cloudy-day.png',
     iconSize: [40, 40],
 })
 
 // "Partly Cloudy (Night)" icon
 const cloudyNightIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/cloudy-night.png',
     iconSize: [40, 40],
 })
 
-// "Light Showers" "Light Rain" "Moderate Rain" icon
-const lightRainIcon = L.icon({
-    iconUrl: '',
-    iconSize: [40, 40],
-})
-
-// "Showers" icon
+// "Light Showers" "Light Rain" "Moderate Rain" "Showers" icon
 const rainIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/rain.png',
     iconSize: [40, 40],
 })
 
 // "Thundery Showers" "Heavy Thundery Showers" icon
 const thunderIcon = L.icon({
-    iconUrl: '',
+    iconUrl: './images/icons/thunder.png',
     iconSize: [40, 40],
 })
 
 // weather icons. if don't meet any of the weather forecast below. default to cloudy
-// const weatherIcons = {
-//     "Fair & Warm" //valid but have to access using object.['key name']
-//     "Fair (Day)"
-//     "Partly Cloudy (Day)""
-//     "Cloudy"
-//     "Partly Cloudy (Night)"
-//     "Light Showers"
-//     "Light Rain"
-//     "Moderate Rain"
-//     "Showers"
-//     "Thundery Showers"
-//     "Heavy Thundery Showers"
-// }
+const weatherIcons = {
+    "Fair & Warm": sunnyIcon,//valid but have to access using object.['key name']
+    "Fair (Day)": sunnyIcon,
+    "Partly Cloudy (Day)": cloudyDayIcon,
+    "Cloudy": cloudyIcon,
+    "Partly Cloudy (Night)": cloudyNightIcon,
+    "Light Showers": rainIcon,
+    "Light Rain": rainIcon,
+    "Moderate Rain": rainIcon,
+    "Showers": rainIcon,
+    "Thundery Showers": thunderIcon,
+    "Heavy Thundery Showers": thunderIcon
+}

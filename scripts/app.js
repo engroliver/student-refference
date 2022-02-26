@@ -11,7 +11,7 @@ let weather2hLayer;
 let singleMarker;
 
 // the col number is based on table data from the geojson file
-let nameDescImgCol = {
+const nameDescImgCol = {
     historic: [4, 6, 3],
     monument: [8, 14, 9],
     museum: [9, 5, 10],
@@ -49,8 +49,8 @@ window.addEventListener('DOMContentLoaded', async function () {
 })
 
 // event listener for single page application
-let navbarLinks = document.querySelectorAll('.navbar-nav > .nav-link')
-for (let link of navbarLinks) {
+let iconLinks = document.querySelectorAll('.icon-link')
+for (let link of iconLinks) {
     link.addEventListener('click', function(event) {
         let selectedLink = event.target;
         let pageName = selectedLink.dataset.page;

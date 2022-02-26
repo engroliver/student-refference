@@ -28,32 +28,15 @@
 </head>
 
 <body>
-
-    <!-- start of navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo to be placed here</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" data-page="home" href="#">Home</a>
-                    <a class="nav-link active" data-page="map" href="#">Map</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- end of navbar -->
-
     <!-- start of main content -->
     <main id="all-pages">
         <!-- start of home page -->
         <section id="home-page" class="page show container-fluid">
+            <i class="fa-solid fa-map fa-2x icon-link" data-page="map"></i>
             <div id="home-page-texts" class="mx-auto">
                 <div>
                     <h4>Dive deep into the history of Singapore</h4>
-                    <p>Discover a random historic site, monument or musuem in Singapore. Or head to 'Map' page to
+                    <p>Discover a random historic site, monument or museum in Singapore. Or head to 'Map' page to
                         explore all of them on an interactive map!</p>
                 </div>
                 <nav>
@@ -70,19 +53,19 @@
                     <div class="tab-pane fade show active" id="nav-historic-site" role="tabpanel">
                         <h5 class="card-title" id="random-site-header"></h5>
                         <p class="card-text" id="random-site-content"></p>
-                        <img class="card-img-top" src="" id="random-site-img">
+                        <img class="card-img-top center" src="" id="random-site-img"><br>
                         <a href="#" class="btn btn-primary mt-3" id="random-site-link">Show on map</a>
                     </div>
                     <div class="tab-pane fade" id="nav-monument" role="tabpanel">
                         <h5 class="card-title" id="random-monument-header"></h5>
                         <p class="card-text" id="random-monument-content"></p>
-                        <img class="card-img-top" src="" id="random-monument-img">
+                        <img class="card-img-top center" src="" id="random-monument-img"><br>
                         <a href="#" class="btn btn-primary mt-3" id="random-monument-link">Show on map</a>
                     </div>
                     <div class="tab-pane fade" id="nav-museum" role="tabpanel">
                         <h5 class="card-title" id="random-museum-header"></h5>
                         <p class="card-text" id="random-museum-content"></p>
-                        <img class="card-img-top" src="" id="random-museum-img">
+                        <img class="card-img-top center" src="" id="random-museum-img"><br>
                         <a href="#" class="btn btn-primary mt-3" id="random-museum-link">Show on map</a>
                     </div>
                 </div>
@@ -92,6 +75,17 @@
 
         <!-- start of map page -->
         <section id="map-page" class="page hidden container-fluid">
+            <i class="fa-solid fa-house fa-2x icon-link" data-page="home"></i>
+            <div id="map-container">
+                <div id="map"></div>
+                <div id="invisible-container"></div>
+                <div id="search-container">
+                    <input id="search-input" type="text" value=""/>
+                    <button id="search-btn">Search</button>
+                    <div id="search-results-display"></div>
+                    <!--  style="overflow-y: auto; height:400px; width: 255px" -->
+                </div>
+            </div>
             <div id="" class="row g-0">
                 <div id="custom-layer-control" class="col">
                     <div id="radio-buttons" class="box">
@@ -127,16 +121,6 @@
                     <p>24h Weather Forecast:</p>
                     <p id="forecast-24h"></p>
                     <p id="temp-24h"></p>
-                </div>
-            </div>
-            <div id="map-container">
-                <div id="map"></div>
-                <div id="invisible-container"></div>
-                <div id="search-container">
-                    <input id="search-input" type="text" value=""/>
-                    <button id="search-btn">Search</button>
-                    <div id="search-results-display"></div>
-                    <!--  style="overflow-y: auto; height:400px; width: 255px" -->
                 </div>
             </div>
         </section>
