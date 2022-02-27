@@ -35,6 +35,11 @@ const searchIcon = L.icon({
     iconSize: [45, 45],
 })
 
+const manIcon = L.icon({
+    iconUrl: './images/icons/man.png',
+    iconSize: [45, 45],
+})
+
 // "Fair & Warm" "Fair (Day)" icon
 const sunnyIcon = L.icon({
     iconUrl: './images/icons/sun.png',
@@ -73,7 +78,7 @@ const thunderIcon = L.icon({
 
 // weather icons. if don't meet any of the weather forecast below. default to cloudy
 const weatherIcons = {
-    "Fair & Warm": sunnyIcon,//valid but have to access using object.['key name']
+    "Fair & Warm": sunnyIcon,
     "Fair (Day)": sunnyIcon,
     "Partly Cloudy (Day)": cloudyDayIcon,
     "Cloudy": cloudyIcon,

@@ -3,8 +3,13 @@
 }
 
 i {
-    color: #A63700;
+    color: #0d6efd;
     margin: 5px 0px;
+}
+
+.icon-link:hover {
+  transform: scale(1.25);
+  transition: transform 0.5s;
 }
 
 .page {

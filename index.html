@@ -80,47 +80,60 @@
                 <div id="map"></div>
                 <div id="invisible-container"></div>
                 <div id="search-container">
-                    <input id="search-input" type="text" value=""/>
+                    <input id="search-input" type="text" value="" />
                     <button id="search-btn">Search</button>
                     <div id="search-results-display"></div>
-                    <!--  style="overflow-y: auto; height:400px; width: 255px" -->
                 </div>
             </div>
             <div id="" class="row g-0">
                 <div id="custom-layer-control" class="col">
                     <div id="radio-buttons" class="box">
-                        <div class="form-check form-check-inline">
+                        <h6>Explore heritage sites</h6>
+                        <div class="form-check">
+                            <img src="images/icons/site.png" height="25px" width="25px" />
+                            <label class="form-check-label" for="historic-site-radio">Historic Sites</label>
                             <input class="form-check-input site-radios" type="radio" name="site-radios"
                                 id="historic-site-radio" value="historic-site" checked>
-                            <label class="form-check-label">Historic Sites</label>
-                            <img src="images/icons/site.png" height="25px" width="25px" />
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <img src="images/icons/monument.png" height="25px" width="25px" />
+                            <label class="form-check-label" for="monument-radio">Monuments</label>
                             <input class="form-check-input site-radios" type="radio" name="site-radios"
                                 id="monument-radio" value="monument">
-                            <label class="form-check-label">Monuments</label>
-                            <img src="images/icons/monument.png" height="25px" width="25px" />
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <img src="images/icons/museum.png" height="25px" width="25px" />
+                            <label class="form-check-label" for="museum-radio">Museums</label>
                             <input class="form-check-input site-radios" type="radio" name="site-radios"
                                 id="museum-radio" value="museum">
-                            <label class="form-check-label">Museums</label>
-                            <img src="images/icons/museum.png" height="25px" width="25px" />
                         </div>
                     </div>
-                    <div id="checkboxes" class="box">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input weather-checkbox" type="checkbox" id="weather-2h-checkbox"
-                                value="2h-weather">
-                            <label class="form-check-label">2h Weather</label>
-                            <img src="images/icons/weather.png" height="25px" width="25px" />
+                    <div class="box">
+                        <h6>Your current location</h6>
+                        <div class="form-check">
+                            <img src="images/icons/man.png" height="25px" width="25px" />
+                            <label class="form-check-label" for="current-location-checkbox">Show on map</label>
+                            <input class="form-check-input location-checkbox" type="checkbox" id="current-location-checkbox"
+                                value="location">
                         </div>
                     </div>
                 </div>
-                <div id="weather-24h-div" class="col box">
-                    <p>24h Weather Forecast:</p>
-                    <p id="forecast-24h"></p>
-                    <p id="temp-24h"></p>
+                <div id="weather-div" class="col box">
+                    <h6>Weather</h6>
+                    <div>
+                        <p style="text-decoration: underline;">24-hour forecast</p>
+                        <p id="forecast-24h"></p>
+                        <p id="temp-24h"></p>
+                    </div>
+                    <div>
+                        <p style="text-decoration: underline;">2-hour nowcast</p>
+                        <div class="form-check">
+                            <img src="images/icons/cloudy-day.png" height="25px" width="25px" />
+                            <label class="form-check-label" for="weather-2h-checkbox">Show on map</label>
+                            <input class="form-check-input weather-checkbox" type="checkbox" id="weather-2h-checkbox"
+                                value="2h-weather">
+                        </div>
+                    </div><br>
                 </div>
             </div>
         </section>

@@ -9,6 +9,9 @@ let monumentLayer;
 let museumLayer;
 let weather2hLayer;
 let singleMarker;
+let locationMarker;
+
+let currentLocation;
 
 // the col number is based on table data from the geojson file
 const nameDescImgCol = {
@@ -41,11 +44,13 @@ window.addEventListener('DOMContentLoaded', async function () {
     monumentLayer = loadGeoJsonLayer(monumentData, monumentIcon, nameDescImgCol.monument);
     museumLayer = loadGeoJsonLayer(museumData, museumIcon, nameDescImgCol.museum);
     weather2hLayer = loadWeather2hLayer(weather2hData);
-    loadWeather24H(weather24hData)
+    loadWeather24H(weather24hData);
 
     getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
     getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
     getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
+
+    locationMarker = await loadLocationMarker()
 })
 
 // event listener for single page application
@@ -74,8 +79,12 @@ for (let radio of radios) {
 }
 
 // event listener for weather layer control using checkboxes
-let checkbox = document.querySelector('.weather-checkbox');
-checkbox.addEventListener('change', weatherLayerControl)
+let weatherCheckbox = document.querySelector('.weather-checkbox');
+weatherCheckbox.addEventListener('change', weatherLayerControl)
+
+// event listener for location marker control using checkboxes
+let locationCheckbox = document.querySelector('.location-checkbox');
+locationCheckbox.addEventListener('change', locationMarkerControl)
 
 // event listener to display search results
 let searchBtn = document.querySelector('#search-btn')

@@ -65,18 +65,40 @@ function loadWeather2hLayer(data) {
     return group;
 }
 
-// 24h data do not need to be plotted on to map
+// function to get 24h weather data
 async function loadWeather24H(data) {
     let weather24h = data.items[0].general
     let forecast = weather24h.forecast
     let temp = weather24h.temperature
 
-    document.querySelector('#forecast-24h').innerHTML = 
-        `${forecast}<br>
-         <img src="${weatherIcons[forecast].options.iconUrl}" width="20%">`
-    document.querySelector('#temp-24h').innerHTML = 
+    document.querySelector('#forecast-24h').innerHTML += 
+        `${forecast} <img src="${weatherIcons[forecast].options.iconUrl}" width="7%">`
+    document.querySelector('#temp-24h').innerHTML += 
         `${temp.low}°C <i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> / 
          ${temp.high}°C <i class="fa-solid fa-temperature-high" style="color: indianred"></i>`
+}
+
+// function to get current coord
+async function loadLocationMarker() {
+    try {
+        let pos = await getLocation()
+        let coord = [pos.coords.latitude, pos.coords.longitude]
+        let marker = L.marker(coord, {icon: manIcon})
+        return marker
+    } catch(error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// function to get current postion
+function getLocation(){
+    if (navigator.geolocation) {
+        return new Promise((resolve, reject) =>
+            navigator.geolocation.getCurrentPosition(resolve, reject)
+        )
+    } else {
+        alert("Geolocation if not supported by this browser")
+    }
 }
 
 // function for random int to get random location from data
@@ -171,6 +193,16 @@ function weatherLayerControl() {
         map.addLayer(weather2hLayer)
     } else {
         map.removeLayer(weather2hLayer)
+    }
+}
+
+// function for current location using checkboxes
+function locationMarkerControl() {
+    if(this.checked) {
+        locationMarker.addTo(map)
+        map.flyTo([locationMarker['_latlng'].lat, locationMarker['_latlng'].lng], 16)
+    } else {
+        map.removeLayer(locationMarker)
     }
 }
 
