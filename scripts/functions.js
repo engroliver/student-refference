@@ -3,8 +3,8 @@ async function getData(dataURL) {
     return response.data
 }
 
-// function to clear all existing layers on map
-function clearAllLayers() {
+// function to clear all site layers and star (random and search) layer on map
+function clearSiteAndStarLayers() {
     if (singleMarker) {
         map.removeLayer(singleMarker)
     }
@@ -16,6 +16,30 @@ function clearAllLayers() {
     let invisibleLayer = document.querySelector('#invisible-container')
     resultsDisplay.innerHTML = ""
     invisibleLayer.style.display = 'none'
+}
+// function to uncheck all radio buttons
+function uncheckRadioBtns(){
+    let radios = document.querySelectorAll('.site-radios');
+    for (let radio of radios) {
+        radio.checked = false
+    }
+}
+
+// function to uncheck all checkboxes
+function uncheckCheckboxes(){
+    let checkboxes = document.querySelectorAll('.checkbox');
+    for (let checkbox of checkboxes) {
+        checkbox.checked = false
+    }
+}
+
+// function to reset map (e.g. clear ALL layers and radio and checkboxes);
+function clearAllLayers() {
+    clearSiteAndStarLayers()
+    uncheckRadioBtns()
+    map.removeLayer(weather2hLayer)
+    map.removeLayer(locationMarker)
+    uncheckCheckboxes()
 }
 
 // function to generate marker layer
@@ -72,10 +96,10 @@ async function loadWeather24H(data) {
     let temp = weather24h.temperature
 
     document.querySelector('#forecast-24h').innerHTML += 
-        `${forecast} <img src="${weatherIcons[forecast].options.iconUrl}" width="7%">`
+        `<img src="${weatherIcons[forecast].options.iconUrl}" width="7%"> ${forecast} `
     document.querySelector('#temp-24h').innerHTML += 
-        `${temp.low}°C <i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> / 
-         ${temp.high}°C <i class="fa-solid fa-temperature-high" style="color: indianred"></i>`
+        `<i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> ${temp.low}°C / 
+         <i class="fa-solid fa-temperature-high" style="color: indianred"></i> ${temp.high}°C`
 }
 
 // function to get current coord
@@ -164,11 +188,8 @@ function getRandomLocation(data, colNoArray, type) { //
         mapPage.classList.add('show');
 
         // remove initial all layer and uncheck all radio
-        clearAllLayers()
-        let radios = document.querySelectorAll('.site-radios');
-        for (let radio of radios) {
-            radio.checked = false
-        }
+        clearSiteAndStarLayers()
+        uncheckRadioBtns()
 
         flyToAndPopup([lat, lng], randomIcon, name, desc, img)
     })
@@ -177,7 +198,7 @@ function getRandomLocation(data, colNoArray, type) { //
 
 // function for site layers control using radio buttons
 function siteLayersControl() {
-    clearAllLayers()
+    clearSiteAndStarLayers()
     if (this.value == 'historic-site') {
         map.addLayer(historicSiteLayer);
     } else if (this.value == 'monument') {
@@ -231,7 +252,6 @@ function displayAllSearchResults() {
 
     // console.log(searchTerm)
     if (searchTerm != "" && searchTerm != " ") {
-        clearAllLayers()
         invisibleLayer.style.display = 'block'
         resultsDisplay.innerHTML = ""
         allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
@@ -253,6 +273,8 @@ function displayAllSearchResults() {
             let searchElem = document.querySelector(`#search-${i}`)
             searchElem.addEventListener('click', function(){
                 // console.log(name)
+                clearSiteAndStarLayers()
+                uncheckRadioBtns()
                 resultsDisplay.innerHTML = ""
                 invisibleLayer.style.display = 'none'
                 flyToAndPopup(coord, searchIcon, name, desc, img)

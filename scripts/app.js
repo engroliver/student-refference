@@ -79,13 +79,17 @@ for (let radio of radios) {
 }
 
 // event listener for weather layer control using checkboxes
-let weatherCheckbox = document.querySelector('.weather-checkbox');
+let weatherCheckbox = document.querySelector('#weather-2h-checkbox');
 weatherCheckbox.addEventListener('change', weatherLayerControl)
 
 // event listener for location marker control using checkboxes
-let locationCheckbox = document.querySelector('.location-checkbox');
+let locationCheckbox = document.querySelector('#current-location-checkbox');
 locationCheckbox.addEventListener('change', locationMarkerControl)
 
 // event listener to display search results
 let searchBtn = document.querySelector('#search-btn')
 searchBtn.addEventListener('click', displayAllSearchResults)
+
+// event listener to reset map
+let resetBtn = document.querySelector('#reset-map')
+resetBtn.addEventListener('click', clearAllLayers)

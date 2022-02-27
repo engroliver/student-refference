@@ -86,8 +86,8 @@
                 </div>
             </div>
             <div id="" class="row g-0">
-                <div id="custom-layer-control" class="col">
-                    <div id="radio-buttons" class="box">
+                <div id="custom-layer-control" class="col box">
+                    <div id="radio-buttons">
                         <h6>Explore heritage sites</h6>
                         <div class="form-check">
                             <img src="images/icons/site.png" height="25px" width="25px" />
@@ -107,15 +107,18 @@
                             <input class="form-check-input site-radios" type="radio" name="site-radios"
                                 id="museum-radio" value="museum">
                         </div>
-                    </div>
-                    <div class="box">
+                    </div><hr>
+                    <div>
                         <h6>Your current location</h6>
                         <div class="form-check">
                             <img src="images/icons/man.png" height="25px" width="25px" />
                             <label class="form-check-label" for="current-location-checkbox">Show on map</label>
-                            <input class="form-check-input location-checkbox" type="checkbox" id="current-location-checkbox"
+                            <input class="form-check-input checkbox" type="checkbox" id="current-location-checkbox"
                                 value="location">
                         </div>
+                    </div><hr>
+                    <div>
+                        <input class="btn btn-warning" type="reset" id="reset-map" value="Reset Map">
                     </div>
                 </div>
                 <div id="weather-div" class="col box">
@@ -130,7 +133,7 @@
                         <div class="form-check">
                             <img src="images/icons/cloudy-day.png" height="25px" width="25px" />
                             <label class="form-check-label" for="weather-2h-checkbox">Show on map</label>
-                            <input class="form-check-input weather-checkbox" type="checkbox" id="weather-2h-checkbox"
+                            <input class="form-check-input checkbox" type="checkbox" id="weather-2h-checkbox"
                                 value="2h-weather">
                         </div>
                     </div><br>
