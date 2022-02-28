@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historic Sites Finder</title>
+    <!-- google font css file -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap" rel="stylesheet">
     <!-- bootstrap css file -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -36,7 +40,7 @@
             <div id="home-page-texts" class="mx-auto">
                 <div>
                     <h4>Dive deep into the history of Singapore</h4>
-                    <p>Discover a random historic site, monument or museum in Singapore. Or head to 'Map' page to
+                    <p>Discover a random historic site, monument or museum in Singapore. Or click on the map icon to
                         explore all of them on an interactive map!</p>
                 </div>
                 <nav>
@@ -79,65 +83,70 @@
             <div id="map-container">
                 <div id="map"></div>
                 <div id="invisible-container"></div>
-                <div id="search-container">
-                    <input id="search-input" type="text" value="" />
-                    <button id="search-btn">Search</button>
-                    <div id="search-results-display"></div>
-                </div>
-            </div>
-            <div id="" class="row g-0">
-                <div id="custom-layer-control" class="col box">
-                    <div id="radio-buttons">
-                        <h6>Explore heritage sites</h6>
-                        <div class="form-check">
-                            <img src="images/icons/site.png" height="25px" width="25px" />
-                            <label class="form-check-label" for="historic-site-radio">Historic Sites</label>
-                            <input class="form-check-input site-radios" type="radio" name="site-radios"
-                                id="historic-site-radio" value="historic-site" checked>
-                        </div>
-                        <div class="form-check">
-                            <img src="images/icons/monument.png" height="25px" width="25px" />
-                            <label class="form-check-label" for="monument-radio">Monuments</label>
-                            <input class="form-check-input site-radios" type="radio" name="site-radios"
-                                id="monument-radio" value="monument">
-                        </div>
-                        <div class="form-check">
-                            <img src="images/icons/museum.png" height="25px" width="25px" />
-                            <label class="form-check-label" for="museum-radio">Museums</label>
-                            <input class="form-check-input site-radios" type="radio" name="site-radios"
-                                id="museum-radio" value="museum">
-                        </div>
-                    </div><hr>
-                    <div>
-                        <h6>Your current location</h6>
-                        <div class="form-check">
-                            <img src="images/icons/man.png" height="25px" width="25px" />
-                            <label class="form-check-label" for="current-location-checkbox">Show on map</label>
-                            <input class="form-check-input checkbox" type="checkbox" id="current-location-checkbox"
-                                value="location">
-                        </div>
-                    </div><hr>
-                    <div>
-                        <input class="btn btn-warning" type="reset" id="reset-map" value="Reset Map">
-                    </div>
-                </div>
-                <div id="weather-div" class="col box">
-                    <h6>Weather</h6>
-                    <div>
-                        <p style="text-decoration: underline;">24-hour forecast</p>
-                        <p id="forecast-24h"></p>
-                        <p id="temp-24h"></p>
+                <div id="control-bar">
+                    <div id="search-container" class="control-bar-btn">
+                        <input id="search-input" type="text" value="" />
+                        <button id="search-btn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <div id="search-results-display" class="box"></div>
                     </div>
                     <div>
-                        <p style="text-decoration: underline;">2-hour nowcast</p>
-                        <div class="form-check">
-                            <img src="images/icons/cloudy-day.png" height="25px" width="25px" />
-                            <label class="form-check-label" for="weather-2h-checkbox">Show on map</label>
-                            <input class="form-check-input checkbox" type="checkbox" id="weather-2h-checkbox"
-                                value="2h-weather">
+                        <button id="location-btn" class="btn btn-primary control-bar-btn"><i class="fa-solid fa-location-dot"></i></i></button>
+                        <div id="location-div" class="box">
+                            <div id="radio-buttons">
+                                <h6><strong>Explore heritage sites</strong></Explore></h6>
+                                <div class="form-check">
+                                    <img src="images/icons/site.png" height="25px" width="25px" />
+                                    <label class="form-check-label" for="historic-site-radio">Historic Sites</label>
+                                    <input class="form-check-input site-radios" type="radio" name="site-radios"
+                                        id="historic-site-radio" value="historic-site" checked>
+                                </div>
+                                <div class="form-check">
+                                    <img src="images/icons/monument.png" height="25px" width="25px" />
+                                    <label class="form-check-label" for="monument-radio">Monuments</label>
+                                    <input class="form-check-input site-radios" type="radio" name="site-radios"
+                                        id="monument-radio" value="monument">
+                                </div>
+                                <div class="form-check">
+                                    <img src="images/icons/museum.png" height="25px" width="25px" />
+                                    <label class="form-check-label" for="museum-radio">Museums</label>
+                                    <input class="form-check-input site-radios" type="radio" name="site-radios"
+                                        id="museum-radio" value="museum">
+                                </div>
+                            </div><hr>
+                            <div>
+                                <h6><strong>Your current location</strong></h6>
+                                <div class="form-check">
+                                    <img src="images/icons/man.png" height="25px" width="25px" />
+                                    <label class="form-check-label" for="current-location-checkbox">Show on map</label>
+                                    <input class="form-check-input checkbox" type="checkbox" id="current-location-checkbox"
+                                        value="location">
+                                </div>
+                            </div><hr>
+                            <div>
+                                <input class="btn btn-warning" type="reset" id="reset-map" value="Reset Map">
+                            </div>
                         </div>
-                    </div><br>
-                </div>
+                    </div>
+                    <div>
+                        <button id="weather-btn" class="btn btn-primary control-bar-btn"><i class="fa-solid fa-cloud"></i></i></button>
+                        <div id="weather-div" class="box">
+                            <div>
+                                <h6><strong>24-hour forecast</strong></h6>
+                                <p id="forecast-24h"></p>
+                                <p id="temp-24h"></p>
+                            </div><hr>
+                            <div>
+                                <h6><strong>2-hour nowcast</strong></h6>
+                                <div class="form-check">
+                                    <img src="images/icons/cloudy-day.png" height="25px" width="25px" />
+                                    <label class="form-check-label" for="weather-2h-checkbox">Show on map</label>
+                                    <input class="form-check-input checkbox" type="checkbox" id="weather-2h-checkbox"
+                                        value="2h-weather">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </section>
         <!-- end of map page -->

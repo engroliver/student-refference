@@ -12,9 +12,7 @@ function clearSiteAndStarLayers() {
     map.removeLayer(monumentLayer);
     map.removeLayer(museumLayer);
 
-    let resultsDisplay = document.querySelector('#search-results-display')
-    let invisibleLayer = document.querySelector('#invisible-container')
-    resultsDisplay.innerHTML = ""
+    resultsDisplay.style.display = 'none'
     invisibleLayer.style.display = 'none'
 }
 // function to uncheck all radio buttons
@@ -96,10 +94,10 @@ async function loadWeather24H(data) {
     let temp = weather24h.temperature
 
     document.querySelector('#forecast-24h').innerHTML += 
-        `<img src="${weatherIcons[forecast].options.iconUrl}" width="7%"> ${forecast} `
+        `<img src="${weatherIcons[forecast].options.iconUrl}" width="25px" height="25px"> ${forecast} `
     document.querySelector('#temp-24h').innerHTML += 
         `<i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> ${temp.low}°C / 
-         <i class="fa-solid fa-temperature-high" style="color: indianred"></i> ${temp.high}°C`
+         ${temp.high}°C <i class="fa-solid fa-temperature-high" style="color: indianred"></i>`
 }
 
 // function to get current coord
@@ -238,7 +236,7 @@ function searchLocations(searchTerm, data, colNoArray) {
         transformedArr.push([name, desc, img, coord])
     }
     let resultsArr = transformedArr.filter(function (location) {
-        return location[0].toLowerCase().includes(searchTerm)
+        return location[0].toLowerCase().split(' ').includes(searchTerm)
     })
     return resultsArr
 }
@@ -246,12 +244,13 @@ function searchLocations(searchTerm, data, colNoArray) {
 // function to display all search results
 function displayAllSearchResults() {
     let searchTerm = document.querySelector('#search-input').value.toLowerCase();
-    let resultsDisplay = document.querySelector('#search-results-display')
-    let invisibleLayer = document.querySelector('#invisible-container')
     let allResults;
 
     // console.log(searchTerm)
     if (searchTerm != "" && searchTerm != " ") {
+        locationDiv.style.display = 'none'
+        weatherDiv.style.display = 'none'
+        resultsDisplay.style.display = 'block'
         invisibleLayer.style.display = 'block'
         resultsDisplay.innerHTML = ""
         allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
@@ -275,7 +274,7 @@ function displayAllSearchResults() {
                 // console.log(name)
                 clearSiteAndStarLayers()
                 uncheckRadioBtns()
-                resultsDisplay.innerHTML = ""
+                resultsDisplay.style.display = 'none'
                 invisibleLayer.style.display = 'none'
                 flyToAndPopup(coord, searchIcon, name, desc, img)
             })
@@ -283,7 +282,33 @@ function displayAllSearchResults() {
     }
 
     invisibleLayer.addEventListener('click', function () {
-        resultsDisplay.innerHTML = ""
+        resultsDisplay.style.display = 'none'
+        invisibleLayer.style.display = 'none'
+    })
+}
+
+// function to display and remove weather div
+function displayWeatherDiv() {    
+    resultsDisplay.style.display = 'none'
+    locationDiv.style.display = 'none'
+    weatherDiv.style.display = 'block'
+    invisibleLayer.style.display = 'block'
+    
+    invisibleLayer.addEventListener('click', function () {
+        weatherDiv.style.display = 'none'
+        invisibleLayer.style.display = 'none'
+    })
+}
+
+// function to display and remove location div
+function displayLocationDiv() {
+    resultsDisplay.style.display = 'none'
+    weatherDiv.style.display = 'none'
+    locationDiv.style.display = 'block'
+    invisibleLayer.style.display = 'block'
+
+    invisibleLayer.addEventListener('click', function () {
+        locationDiv.style.display = 'none'
         invisibleLayer.style.display = 'none'
     })
 }

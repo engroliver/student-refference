@@ -13,6 +13,11 @@ let locationMarker;
 
 let currentLocation;
 
+let resultsDisplay = document.querySelector('#search-results-display')
+let locationDiv = document.querySelector('#location-div')
+let weatherDiv = document.querySelector('#weather-div')
+let invisibleLayer = document.querySelector('#invisible-container')
+
 // the col number is based on table data from the geojson file
 const nameDescImgCol = {
     historic: [4, 6, 3],
@@ -93,3 +98,12 @@ searchBtn.addEventListener('click', displayAllSearchResults)
 // event listener to reset map
 let resetBtn = document.querySelector('#reset-map')
 resetBtn.addEventListener('click', clearAllLayers)
+
+// event listener to open weather div
+let weatherBtn = document.querySelector('#weather-btn')
+weatherBtn.addEventListener('click', displayWeatherDiv)
+
+// // event listener to open control layer div
+let siteBtn = document.querySelector('#location-btn')
+siteBtn.addEventListener('click', displayLocationDiv)
+
