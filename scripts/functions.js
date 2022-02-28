@@ -38,6 +38,7 @@ function clearAllLayers() {
     map.removeLayer(weather2hLayer)
     map.removeLayer(locationMarker)
     uncheckCheckboxes()
+    invisibleLayer.style.display = 'block'
 }
 
 // function to generate marker layer
@@ -56,7 +57,7 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
             marker.bindPopup(`
             <p><strong>${name}</strong></p>
             <p>${desc}</p>
-            <img src="${img}" class="center" width='200px' display:block/>
+            <img src="${img}" class="center" width="200px" display:block/>
             `)
         },
         'pointToLayer': function (feature, latlng) {
@@ -136,7 +137,7 @@ function flyToAndPopup(coord, icon, name, desc, img) {
     singleMarker.bindPopup(`
     <p><strong>${name}</strong></p>
     <p>${desc}</p>
-    <img src="${img}" class="center" width='200px' display:block/>
+    <img src="${img}" class="center" width="200px" display:block/>
     `)
     singleMarker.addTo(map)
     singleMarker.openPopup()
@@ -170,6 +171,23 @@ function getRandomLocation(data, colNoArray, type) { //
     // get description data from randomly selected location
     let {name, desc, img} = getDescData(dataFeatures, randomInt, colNoArray)
 
+    // function ImageExist(url) {
+    //     let img = new Image();
+    //     console.log(img)
+    //     img.src = url
+    //     console.log(img.height)
+    //     return img.height != 0;
+    // }
+    // let result = ImageExist(img)
+    // console.log('new result')
+    // console.log(result)
+
+    // if (result) {
+    //     imgElement.src = img
+    // } else {
+    //     imgElement.src = './images/404.jpg'
+    // }
+
     headerElement.innerText = name
     contentElement.innerText = desc
     imgElement.src = img
@@ -197,6 +215,7 @@ function getRandomLocation(data, colNoArray, type) { //
 // function for site layers control using radio buttons
 function siteLayersControl() {
     clearSiteAndStarLayers()
+    invisibleLayer.style.display = 'block'
     if (this.value == 'historic-site') {
         map.addLayer(historicSiteLayer);
     } else if (this.value == 'monument') {
