@@ -157,6 +157,11 @@ function getDescData(data, featureNo, colNoArray) {
             img: img}
 }
 
+// async function imageExists(url){
+//     let response = await axios.get(url)
+//     console.log(response)
+// }
+
 // function to get random location from data, and append link to map on button
 function getRandomLocation(data, colNoArray, type) { // 
     let randomInt = getRandomInt(0, data.features.length);
@@ -170,23 +175,6 @@ function getRandomLocation(data, colNoArray, type) { //
 
     // get description data from randomly selected location
     let {name, desc, img} = getDescData(dataFeatures, randomInt, colNoArray)
-
-    // function ImageExist(url) {
-    //     let img = new Image();
-    //     console.log(img)
-    //     img.src = url
-    //     console.log(img.height)
-    //     return img.height != 0;
-    // }
-    // let result = ImageExist(img)
-    // console.log('new result')
-    // console.log(result)
-
-    // if (result) {
-    //     imgElement.src = img
-    // } else {
-    //     imgElement.src = './images/404.jpg'
-    // }
 
     headerElement.innerText = name
     contentElement.innerText = desc

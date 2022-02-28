@@ -6,6 +6,16 @@ h1, h2, h3, h4, h5, h6, p, button, label, input, a, div {
     position: relative;
 }
 
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+nav > div > h1 {
+    margin: 0;
+}
+
 .icon-link {
     color: #0d6efd;
     margin: 5px 0px;
