@@ -11,7 +11,6 @@ let weather2hLayer;
 let singleMarker;
 let locationMarker;
 
-let currentLocation;
 const placeholderImgUrl = 'images/404.jpg' 
 
 let resultsDisplay = document.querySelector('#search-results-display')
@@ -39,6 +38,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     let museumRes = await museumReq;
     let weather2hRes = await weather2hReq;
     let weather24hRes = await weather24hReq
+    locationMarker = await loadLocationMarker()
 
     historicSiteData = historicSiteRes.data;
     monumentData = monumentRes.data;
@@ -55,8 +55,6 @@ window.addEventListener('DOMContentLoaded', async function () {
     getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
     getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
     getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
-
-    locationMarker = await loadLocationMarker()
 })
 
 // event listener for single page application

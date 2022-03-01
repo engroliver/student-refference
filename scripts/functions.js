@@ -36,7 +36,9 @@ function clearAllLayers() {
     clearSiteAndStarLayers()
     uncheckRadioBtns()
     map.removeLayer(weather2hLayer)
-    map.removeLayer(locationMarker)
+    if(locationMarker){
+        map.removeLayer(locationMarker)
+    }
     uncheckCheckboxes()
     invisibleLayer.style.display = 'block'
 }
@@ -54,11 +56,11 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
             let name = columns[colNoArray[0]].innerHTML;
             let desc = columns[colNoArray[1]].innerHTML;
             let img = columns[colNoArray[2]].innerHTML;
-            marker.bindPopup(`
+            let popupText = `
             <p><strong>${name}</strong></p>
             <p>${desc}</p>
-            <img src="${img}" class="center" width="200px" display:block/>
-            `)
+            <img src="${img}" class="center" width="200px" display:block/>`
+            marker.bindPopup(popupText)
         },
         'pointToLayer': function (feature, latlng) {
             return L.marker(latlng, { icon: layerIcon })
@@ -134,11 +136,13 @@ function getRandomInt(min, max) {
 function flyToAndPopup(coord, icon, name, desc, img) {
     map.flyTo([coord[0] + 0.004, coord[1]], 16);
     singleMarker = L.marker(coord, { icon: icon });
-    singleMarker.bindPopup(`
+
+    let popupText = `
     <p><strong>${name}</strong></p>
     <p>${desc}</p>
-    <img src="${img}" class="center" width="200px" display:block/>
-    `)
+    <img src="${img}" class="center" width="200px" display:block/>`
+
+    singleMarker.bindPopup(popupText)
     singleMarker.addTo(map)
     singleMarker.openPopup()
 }
@@ -326,6 +330,11 @@ function displayWeatherDiv() {
 
 // function to display and remove location div
 function displayLocationDiv() {
+    let currentLocationDiv = document.querySelector('#current-location')
+    if (locationMarker) {
+        currentLocationDiv.style.display = 'block'
+    }
+
     resultsDisplay.style.display = 'none'
     weatherDiv.style.display = 'none'
     locationDiv.style.display = 'block'

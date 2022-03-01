@@ -86,10 +86,12 @@ nav > div > h1 {
 
 .nav-link {
     color: black;
+    border-color: #ffeabf;
 }
 
 .nav-link:hover {
     color: #ed961f!important;
+    border-color: black;
 }
 
 .nav-link.active {
