@@ -109,7 +109,7 @@ async function loadLocationMarker() {
         let marker = L.marker(coord, {icon: manIcon})
         return marker
     } catch(error) {
-        alert('Error: ' + error.message);
+        alert('Error: Unable to determine current location, location services not available');
     }
 }
 
@@ -279,18 +279,17 @@ async function displayAllSearchResults() {
         weatherDiv.style.display = 'none'
         resultsDisplay.style.display = 'block'
         invisibleLayer.style.display = 'block'
-        resultsDisplay.innerHTML = ""
-        // allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
-        //               ...searchLocations(searchTerm, monumentData, nameDescImgCol.monument),
-        //               ...searchLocations(searchTerm, museumData, nameDescImgCol.museum)]
+        resultsDisplay.innerHTML = "Searching..."
+        
         let historicSiteSearch = await searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic)
         let monumentSearch = await searchLocations(searchTerm, monumentData, nameDescImgCol.monument)
         let museumSearch = await searchLocations(searchTerm, museumData, nameDescImgCol.museum)
         allResults = [...historicSiteSearch, ...monumentSearch, ...museumSearch]
+        resultsDisplay.innerHTML = ""
 
         for (let i = 0; i < allResults.length; i++) {
             let [name, desc, img, coord] = allResults[i]
-            resultsDisplay.innerHTML += `<div id="search-${i}"><a href="#">${name}</a></div>`
+            resultsDisplay.innerHTML += `<div id="search-${i}"><a href="#" style="text-decoration: none; color: black">${name}</a></div>`
         }
 
         for (let i = 0; i < allResults.length; i++) {

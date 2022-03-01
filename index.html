@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historic Sites Finder</title>
+    <title>Discovering Singapore's Heritage Sites</title>
     <!-- google font css file -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,23 +38,24 @@
         <section id="home-page" class="page show container-fluid">
             <nav>
                 <div>
-                    <h1><strong>Page name</strong></h1>
+                    <img src="images/site-logo.png" height="32px" width="32px" />
+                    <h1><strong>Site Historian</strong></h1>
                 </div>
                 <div class="fa-solid fa-map fa-2x icon-link" data-page="map"></div>
             </nav>
             <div id="home-page-texts" class="mx-auto">
                 <div>
-                    <h4>Dive deep into the history of Singapore</h4>
+                    <h4 style='text-align: center'>Dive deep into the history of Singapore</h4>
                     <p>Discover a random historic site, monument or museum in Singapore. Or click on the map icon to
                         explore all of them on an interactive map!</p>
                 </div>
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-historic-site-tab" data-bs-toggle="tab"
+                        <button class="nav-link active tab-custom" id="nav-historic-site-tab" data-bs-toggle="tab"
                             data-bs-target="#nav-historic-site" type="button" role="tab">Historic Site</button>
-                        <button class="nav-link" id="nav-monument-tab" data-bs-toggle="tab"
+                        <button class="nav-link tab-custom" id="nav-monument-tab" data-bs-toggle="tab"
                             data-bs-target="#nav-monument" type="button" role="tab">Monument</button>
-                        <button class="nav-link" id="nav-museum-tab" data-bs-toggle="tab" data-bs-target="#nav-museum"
+                        <button class="nav-link tab-custom" id="nav-museum-tab" data-bs-toggle="tab" data-bs-target="#nav-museum"
                             type="button" role="tab">Museum</button>
                     </div>
                 </nav>
@@ -63,19 +64,19 @@
                         <h5 class="card-title" id="random-site-header"></h5>
                         <p class="card-text" id="random-site-content"></p>
                         <img class="card-img-top center" src="" id="random-site-img"><br>
-                        <a href="#" class="btn btn-primary mt-3" id="random-site-link">Show on map</a>
+                        <a href="#" class="btn btn-custom mt-3" id="random-site-link">Show on map</a>
                     </div>
                     <div class="tab-pane fade" id="nav-monument" role="tabpanel">
                         <h5 class="card-title" id="random-monument-header"></h5>
                         <p class="card-text" id="random-monument-content"></p>
                         <img class="card-img-top center" src="" id="random-monument-img"><br>
-                        <a href="#" class="btn btn-primary mt-3" id="random-monument-link">Show on map</a>
+                        <a href="#" class="btn btn-custom mt-3" id="random-monument-link">Show on map</a>
                     </div>
                     <div class="tab-pane fade" id="nav-museum" role="tabpanel">
                         <h5 class="card-title" id="random-museum-header"></h5>
                         <p class="card-text" id="random-museum-content"></p>
                         <img class="card-img-top center" src="" id="random-museum-img"><br>
-                        <a href="#" class="btn btn-primary mt-3" id="random-museum-link">Show on map</a>
+                        <a href="#" class="btn btn-custom mt-3" id="random-museum-link">Show on map</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +87,8 @@
         <section id="map-page" class="page hidden container-fluid">
             <nav>
                 <div>
-                    <h1>Page name</h1>
+                    <img src="images/site-logo.png" height="32px" width="32px" />
+                    <h1><strong>Site Historian</strong></h1>
                 </div>
                 <div class="fa-solid fa-house fa-2x icon-link" data-page="home"></div>
             </nav>
@@ -95,12 +97,12 @@
                 <div id="invisible-container"></div>
                 <div id="control-bar">
                     <div id="search-container" class="control-bar-btn">
-                        <input id="search-input" type="text" value="" />
-                        <button id="search-btn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input id="search-input" type="text" value="" placeholder="E.g. park or school"/>
+                        <button id="search-btn" class="btn btn-custom"><i class="fa-solid fa-magnifying-glass"></i></button>
                         <div id="search-results-display" class="box"></div>
                     </div>
                     <div>
-                        <button id="location-btn" class="btn btn-primary control-bar-btn"><i class="fa-solid fa-location-dot"></i></i></button>
+                        <button id="location-btn" class="btn btn-custom control-bar-btn"><i class="fa-solid fa-location-dot"></i></i></button>
                         <div id="location-div" class="box">
                             <div id="radio-buttons">
                                 <h6><strong>Explore heritage sites</strong></Explore></h6>
@@ -133,12 +135,12 @@
                                 </div>
                             </div><hr>
                             <div>
-                                <input class="btn btn-warning" type="reset" id="reset-map" value="Reset Map">
+                                <input class="btn btn-custom" type="reset" id="reset-map" value="Reset Map">
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button id="weather-btn" class="btn btn-primary control-bar-btn"><i class="fa-solid fa-cloud"></i></i></button>
+                        <button id="weather-btn" class="btn btn-custom control-bar-btn"><i class="fa-solid fa-cloud"></i></i></button>
                         <div id="weather-div" class="box">
                             <div>
                                 <h6><strong>24-hour forecast</strong></h6>

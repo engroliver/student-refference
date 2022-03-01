@@ -2,8 +2,25 @@ h1, h2, h3, h4, h5, h6, p, button, label, input, a, div {
     font-family: 'Barlow Condensed', sans-serif;
 }
 
+body {
+    background-color: #ffeabf;
+}
+
 #all-pages {
     position: relative;
+}
+
+.btn-custom {
+    color: white;
+    border-color: #ffeabf;
+    background-color: #73472f;
+}
+
+.btn-custom:hover, .btn-custom:focus, .btn-custom:active, .btn-custom.active, .open>.dropdown-toggle.btn-custom {
+    color: #fff;
+    border-color: #ffeabf;
+    background-color: #ed961f;
+    box-shadow:none !important
 }
 
 nav {
@@ -12,13 +29,21 @@ nav {
     justify-content: space-between;
 }
 
+nav > div {
+    display: flex;
+    align-items: center;
+}
+
 nav > div > h1 {
     margin: 0;
 }
 
 .icon-link {
-    color: #0d6efd;
+    color: #73472f;
     margin: 5px 0px;
+}
+
+.icon-link:hover {
     animation-name: bounce;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -41,7 +66,6 @@ nav > div > h1 {
     padding: auto;
     box-sizing: border-box;
     position: absolute;
-    /* background-color: #A89083; */
 }
 
 #home-page-texts {
@@ -49,6 +73,7 @@ nav > div > h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 92%;
 }
 
 #home-page-texts > div {
@@ -56,7 +81,21 @@ nav > div > h1 {
 }
 
 .card-img-top {
-    width: 70%;
+    width: 50%;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: #ed961f!important;
+}
+
+.nav-link.active {
+    color: white !important;
+    background-color: #73472f !important;
+    border-color: #ffeabf !important;
 }
 
 #map-container {
@@ -65,7 +104,7 @@ nav > div > h1 {
 
 /* height to be adjusted */
 #map {
-    height: 90vh;
+    height: 92vh;
 }
 
 #control-bar {
@@ -93,15 +132,11 @@ nav > div > h1 {
 
 .box {
     box-sizing: border-box;
-    border: 1px solid #0d6efd;
+    border: 1px solid #ed961f;
     border-radius: 0.25rem;
     margin: 3px;
     padding: 5px;
 }
-
-/* #control-bar {
-
-} */
 
 #weather-div, #location-div {
     display: none;
@@ -123,6 +158,10 @@ nav > div > h1 {
     margin: 2px;
     border-radius: 0.25rem;
     background-color: rgb(255, 255, 255, 0.7);
+}
+
+#search-results-display > div > a:hover {
+    color: #ed961f !important;
 }
 
 .control-bar-btn {
