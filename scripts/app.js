@@ -12,7 +12,7 @@ let singleMarker;
 let locationMarker;
 
 let currentLocation;
-// const placeholderImgUrl = 'images/404.jpg' 
+const placeholderImgUrl = 'images/404.jpg' 
 
 let resultsDisplay = document.querySelector('#search-results-display')
 let locationDiv = document.querySelector('#location-div')

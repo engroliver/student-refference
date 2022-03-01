@@ -157,13 +157,21 @@ function getDescData(data, featureNo, colNoArray) {
             img: img}
 }
 
-// async function imageExists(url){
-//     let response = await axios.get(url)
-//     console.log(response)
-// }
+async function imageExists(url) {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.onload = function () {
+        resolve(true);
+      }
+      img.onerror = function (error) {
+        resolve(false);
+      }
+      img.src = url;
+    })
+}
 
 // function to get random location from data, and append link to map on button
-function getRandomLocation(data, colNoArray, type) { // 
+async function getRandomLocation(data, colNoArray, type) { // 
     let randomInt = getRandomInt(0, data.features.length);
     let headerElement = document.querySelector(`#random-${type}-header`);
     let contentElement = document.querySelector(`#random-${type}-content`);
@@ -175,10 +183,17 @@ function getRandomLocation(data, colNoArray, type) { //
 
     // get description data from randomly selected location
     let {name, desc, img} = getDescData(dataFeatures, randomInt, colNoArray)
+    // check if img url gives an image
+    let imgExists = await imageExists(img)
+    if (imgExists) {
+        imgElement.src = img
+    } else {
+        imgElement.src = placeholderImgUrl
+        img = placeholderImgUrl
+    }
 
     headerElement.innerText = name
     contentElement.innerText = desc
-    imgElement.src = img
 
     // function (eventlistener) to fly to selected point
     linkElement.addEventListener('click', function () {
@@ -233,13 +248,19 @@ function locationMarkerControl() {
 }
 
 // function to search for locations
-function searchLocations(searchTerm, data, colNoArray) {
+async function searchLocations(searchTerm, data, colNoArray) {
     let transformedArr = [];
     let dataFeatures = data.features
     for (let i = 0; i < dataFeatures.length; i++) {
         let {name, desc, img} = getDescData(dataFeatures, i, colNoArray);
         let coord = [dataFeatures[i].geometry.coordinates[1],
                      dataFeatures[i].geometry.coordinates[0]]
+        // check if img url gives an image
+        let imgExists = await imageExists(img)
+        if (!imgExists) {
+            img = placeholderImgUrl
+        }
+        
         transformedArr.push([name, desc, img, coord])
     }
     let resultsArr = transformedArr.filter(function (location) {
@@ -249,36 +270,33 @@ function searchLocations(searchTerm, data, colNoArray) {
 }
 
 // function to display all search results
-function displayAllSearchResults() {
+async function displayAllSearchResults() {
     let searchTerm = document.querySelector('#search-input').value.toLowerCase();
     let allResults;
 
-    // console.log(searchTerm)
     if (searchTerm != "" && searchTerm != " ") {
         locationDiv.style.display = 'none'
         weatherDiv.style.display = 'none'
         resultsDisplay.style.display = 'block'
         invisibleLayer.style.display = 'block'
         resultsDisplay.innerHTML = ""
-        allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
-                      ...searchLocations(searchTerm, monumentData, nameDescImgCol.monument),
-                      ...searchLocations(searchTerm, museumData, nameDescImgCol.museum)]
+        // allResults = [...searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic),
+        //               ...searchLocations(searchTerm, monumentData, nameDescImgCol.monument),
+        //               ...searchLocations(searchTerm, museumData, nameDescImgCol.museum)]
+        let historicSiteSearch = await searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic)
+        let monumentSearch = await searchLocations(searchTerm, monumentData, nameDescImgCol.monument)
+        let museumSearch = await searchLocations(searchTerm, museumData, nameDescImgCol.museum)
+        allResults = [...historicSiteSearch, ...monumentSearch, ...museumSearch]
 
         for (let i = 0; i < allResults.length; i++) {
             let [name, desc, img, coord] = allResults[i]
             resultsDisplay.innerHTML += `<div id="search-${i}"><a href="#">${name}</a></div>`
-            
-            // let searchElem = document.querySelector(`#search-${i}`)
-            // searchElem.addEventListener('click', function(){
-            //     console.log(name)
-            // })
         }
 
         for (let i = 0; i < allResults.length; i++) {
             let [name, desc, img, coord] = allResults[i]
             let searchElem = document.querySelector(`#search-${i}`)
             searchElem.addEventListener('click', function(){
-                // console.log(name)
                 clearSiteAndStarLayers()
                 uncheckRadioBtns()
                 resultsDisplay.style.display = 'none'
