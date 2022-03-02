@@ -53,7 +53,7 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
             let popupText = `
             <p><strong>${name}</strong></p>
             <p>${desc}</p>
-            <img src="${img}" class="center" width="200px" display:block/>`
+            <img src="${img}" class="center" width="70%" display:block/>`
             marker.bindPopup(popupText)
         },
         'pointToLayer': function (feature, latlng) {
@@ -134,7 +134,7 @@ function flyToAndPopup(coord, icon, name, desc, img) {
     let popupText = `
     <p><strong>${name}</strong></p>
     <p>${desc}</p>
-    <img src="${img}" class="center" width="200px" display:block/>`
+    <img src="${img}" class="center" width="70%" display:block/>`
 
     singleMarker.bindPopup(popupText)
     singleMarker.addTo(map)

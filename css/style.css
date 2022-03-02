@@ -1,5 +1,9 @@
 h1, h2, h3, h4, h5, h6, p, button, label, input, a, div {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Barlow', sans-serif;
+}
+
+p {
+    text-align: center;
 }
 
 body {
@@ -23,18 +27,18 @@ body {
     box-shadow:none !important
 }
 
-nav {
+.custom-navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-nav > div {
+.custom-navbar > div {
     display: flex;
     align-items: center;
 }
 
-nav > div > h1 {
+.custom-navbar > div > h1 {
     margin: 0;
 }
 
@@ -69,19 +73,24 @@ nav > div > h1 {
 }
 
 #home-page-texts {
-    text-align: justify;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 94%;
 }
 
-#home-page-texts > div {
-    margin-top: 5px;
+#nav-tab {
+    border-bottom: 0px;
+    justify-content: center;
 }
 
 .card-img-top {
-    width: 50%;
+    width: 70%;
+}
+
+.card-title {
+    text-align: center;
 }
 
 .nav-link {
@@ -91,7 +100,7 @@ nav > div > h1 {
 
 .nav-link:hover {
     color: #ed961f!important;
-    border-color: black;
+    border-color: #ed961f!important;
 }
 
 .nav-link.active {
@@ -107,6 +116,19 @@ nav > div > h1 {
 /* height to be adjusted */
 #map {
     height: 94vh;
+}
+
+.leaflet-container {
+    font-size: 15px;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #fff4dd;
+    justify-content: center;
+}
+
+.leaflet-popup-content p {
+    margin: 10px 0
 }
 
 #control-bar {
@@ -143,7 +165,7 @@ nav > div > h1 {
 #weather-div, #location-div {
     display: none;
     position: absolute;
-    min-width: 150px;
+    min-width: 170px;
     background-color: rgb(255, 255, 255, 0.7)
 }
 

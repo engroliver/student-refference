@@ -1,4 +1,6 @@
 # Historic Sites Finder
+Live link to the deployed website: 
+
 ## Data Sources
 1. Singapore Historic Sites 
     - https://data.gov.sg/dataset/historic-sites
@@ -17,6 +19,8 @@
 ## Value Added to Target Audience
 The Historic Sites Finder app aims to provide the location and information on all the historic sites and museums in Singapore on a map. The app will also allow users to check the 2h and 24h weather forecast, making it easy for users to plan a spontaneous or day trip on Singapore's history.
 
+## UI/UX
+
 ## Features
 ### Limitations of Application
 1. Search function is limited to searching by name of the location provided by the data sources. The search terms have to be exact (e.g. does not accounts for spelling mistakes).
@@ -29,6 +33,10 @@ The Historic Sites Finder app aims to provide the location and information on al
 2. Bootstrap
 3. Leaflet and Markercluster
 4. Fontawesome and Google Fonts
+
+## Test Cases
+
+## Deployment
 
 ## Credits
 1. Data sources from www.data.gov.sg
