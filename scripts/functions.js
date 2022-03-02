@@ -1,8 +1,3 @@
-async function getData(dataURL) {
-    let response = await axios.get(dataURL);
-    return response.data
-}
-
 // function to clear all site layers and star (random and search) layer on map
 function clearSiteAndStarLayers() {
     if (singleMarker) {
@@ -16,7 +11,7 @@ function clearSiteAndStarLayers() {
     invisibleLayer.style.display = 'none'
 }
 // function to uncheck all radio buttons
-function uncheckRadioBtns(){
+function uncheckRadioBtns() {
     let radios = document.querySelectorAll('.site-radios');
     for (let radio of radios) {
         radio.checked = false
@@ -24,7 +19,7 @@ function uncheckRadioBtns(){
 }
 
 // function to uncheck all checkboxes
-function uncheckCheckboxes(){
+function uncheckCheckboxes() {
     let checkboxes = document.querySelectorAll('.checkbox');
     for (let checkbox of checkboxes) {
         checkbox.checked = false
@@ -36,7 +31,7 @@ function clearAllLayers() {
     clearSiteAndStarLayers()
     uncheckRadioBtns()
     map.removeLayer(weather2hLayer)
-    if(locationMarker){
+    if (locationMarker) {
         map.removeLayer(locationMarker)
     }
     uncheckCheckboxes()
@@ -45,7 +40,6 @@ function clearAllLayers() {
 
 // function to generate marker layer
 function loadGeoJsonLayer(data, layerIcon, colNoArray) {
-    // let data = await getData(geoJSONFile);
     let group = L.markerClusterGroup();
     L.geoJson(data, {
         'onEachFeature': function (feature, marker) {
@@ -96,9 +90,9 @@ async function loadWeather24H(data) {
     let forecast = weather24h.forecast
     let temp = weather24h.temperature
 
-    document.querySelector('#forecast-24h').innerHTML += 
+    document.querySelector('#forecast-24h').innerHTML +=
         `<img src="${weatherIcons[forecast].options.iconUrl}" width="25px" height="25px"> ${forecast} `
-    document.querySelector('#temp-24h').innerHTML += 
+    document.querySelector('#temp-24h').innerHTML +=
         `<i class="fa-solid fa-temperature-low" style="color: dodgerblue"></i> ${temp.low}°C / 
          ${temp.high}°C <i class="fa-solid fa-temperature-high" style="color: indianred"></i>`
 }
@@ -108,15 +102,15 @@ async function loadLocationMarker() {
     try {
         let pos = await getLocation()
         let coord = [pos.coords.latitude, pos.coords.longitude]
-        let marker = L.marker(coord, {icon: manIcon})
+        let marker = L.marker(coord, { icon: manIcon })
         return marker
-    } catch(error) {
-        alert('Error: Unable to determine current location, location services not available');
+    } catch (error) {
+        alert('Error: Location services not enabled/available, certain features will not be available');
     }
 }
 
 // function to get current postion
-function getLocation(){
+function getLocation() {
     if (navigator.geolocation) {
         return new Promise((resolve, reject) =>
             navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -156,21 +150,23 @@ function getDescData(data, featureNo, colNoArray) {
     let desc = columns[colNoArray[1]].innerHTML;
     let img = columns[colNoArray[2]].innerHTML;
 
-    return {name: name, 
-            desc: desc, 
-            img: img}
+    return {
+        name: name,
+        desc: desc,
+        img: img
+    }
 }
 
 async function imageExists(url) {
     return new Promise((resolve, reject) => {
-      let img = new Image();
-      img.onload = function () {
-        resolve(true);
-      }
-      img.onerror = function (error) {
-        resolve(false);
-      }
-      img.src = url;
+        let img = new Image();
+        img.onload = function () {
+            resolve(true);
+        }
+        img.onerror = function (error) {
+            resolve(false);
+        }
+        img.src = url;
     })
 }
 
@@ -186,7 +182,7 @@ async function getRandomLocation(data, colNoArray, type) { //
     let lng = dataFeatures[randomInt].geometry.coordinates[0];
 
     // get description data from randomly selected location
-    let {name, desc, img} = getDescData(dataFeatures, randomInt, colNoArray)
+    let { name, desc, img } = getDescData(dataFeatures, randomInt, colNoArray)
     // check if img url gives an image
     let imgExists = await imageExists(img)
     if (imgExists) {
@@ -199,6 +195,7 @@ async function getRandomLocation(data, colNoArray, type) { //
     headerElement.innerText = name
     contentElement.innerText = desc
 
+    linkElement.style.display = 'inline'
     // function (eventlistener) to fly to selected point
     linkElement.addEventListener('click', function () {
         let homePage = document.querySelector('#home-page')
@@ -243,7 +240,7 @@ function weatherLayerControl() {
 
 // function for current location using checkboxes
 function locationMarkerControl() {
-    if(this.checked) {
+    if (this.checked) {
         locationMarker.addTo(map)
         map.flyTo([locationMarker['_latlng'].lat, locationMarker['_latlng'].lng], 16)
     } else {
@@ -256,15 +253,15 @@ async function searchLocations(searchTerm, data, colNoArray) {
     let transformedArr = [];
     let dataFeatures = data.features
     for (let i = 0; i < dataFeatures.length; i++) {
-        let {name, desc, img} = getDescData(dataFeatures, i, colNoArray);
+        let { name, desc, img } = getDescData(dataFeatures, i, colNoArray);
         let coord = [dataFeatures[i].geometry.coordinates[1],
-                     dataFeatures[i].geometry.coordinates[0]]
+        dataFeatures[i].geometry.coordinates[0]]
         // check if img url gives an image
         let imgExists = await imageExists(img)
         if (!imgExists) {
             img = placeholderImgUrl
         }
-        
+
         transformedArr.push([name, desc, img, coord])
     }
     let resultsArr = transformedArr.filter(function (location) {
@@ -275,16 +272,16 @@ async function searchLocations(searchTerm, data, colNoArray) {
 
 // function to display all search results
 async function displayAllSearchResults() {
-    let searchTerm = document.querySelector('#search-input').value.toLowerCase();
+    let searchTerm = document.querySelector('#search-input').value.toLowerCase().trim();
     let allResults;
+    locationDiv.style.display = 'none'
+    weatherDiv.style.display = 'none'
+    resultsDisplay.style.display = 'block'
+    invisibleLayer.style.display = 'block'
 
-    if (searchTerm != "" && searchTerm != " ") {
-        locationDiv.style.display = 'none'
-        weatherDiv.style.display = 'none'
-        resultsDisplay.style.display = 'block'
-        invisibleLayer.style.display = 'block'
+    if (searchTerm != "") {
         resultsDisplay.innerHTML = "Searching..."
-        
+
         let historicSiteSearch = await searchLocations(searchTerm, historicSiteData, nameDescImgCol.historic)
         let monumentSearch = await searchLocations(searchTerm, monumentData, nameDescImgCol.monument)
         let museumSearch = await searchLocations(searchTerm, museumData, nameDescImgCol.museum)
@@ -299,7 +296,7 @@ async function displayAllSearchResults() {
         for (let i = 0; i < allResults.length; i++) {
             let [name, desc, img, coord] = allResults[i]
             let searchElem = document.querySelector(`#search-${i}`)
-            searchElem.addEventListener('click', function(){
+            searchElem.addEventListener('click', function () {
                 clearSiteAndStarLayers()
                 uncheckRadioBtns()
                 resultsDisplay.style.display = 'none'
@@ -307,6 +304,12 @@ async function displayAllSearchResults() {
                 flyToAndPopup(coord, searchIcon, name, desc, img)
             })
         }
+
+        if (!resultsDisplay.innerText) {
+            resultsDisplay.innerText = "No results found."
+        }
+    } else {
+        resultsDisplay.innerText = "Please enter something."
     }
 
     invisibleLayer.addEventListener('click', function () {
@@ -316,12 +319,12 @@ async function displayAllSearchResults() {
 }
 
 // function to display and remove weather div
-function displayWeatherDiv() {    
+function displayWeatherDiv() {
     resultsDisplay.style.display = 'none'
     locationDiv.style.display = 'none'
     weatherDiv.style.display = 'block'
     invisibleLayer.style.display = 'block'
-    
+
     invisibleLayer.addEventListener('click', function () {
         weatherDiv.style.display = 'none'
         invisibleLayer.style.display = 'none'
