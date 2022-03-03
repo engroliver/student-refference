@@ -1,0 +1,125 @@
+@media screen and (max-width: 768px) {
+    #search-input {
+        width: 170px;
+    }
+    
+    #overlay-bar {
+        top: 8px;
+        left: auto !important;
+        right: 4px;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .overlay-bar-btn {
+        margin-bottom: 5px!important;
+    }
+
+    #weather-div, #location-div {
+        right: 51px;
+        top: 0px;
+    }
+
+    #search-results-display {
+        right: 48px;
+        top: 35px;
+    }
+
+    .card-img-top {
+        width: 70% !important;
+    }
+}
+
+
+#map-container {
+    position: relative;
+}
+
+/* height to be adjusted */
+#map {
+    height: 94vh;
+}
+
+.leaflet-container {
+    font-size: 15px;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #fff4dd;
+    justify-content: center;
+}
+
+.leaflet-popup-content p {
+    margin: 10px 0
+}
+
+#overlay-bar {
+    position: absolute;
+    top: 8px;
+    left: 50px;
+    z-index: 314160;
+    display: flex;
+}
+
+#overlay-bar > div > button {
+    width: 46px;
+}
+
+#invisible-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(255, 255, 255, 0);
+    z-index: 314159;
+    display: none;
+}
+
+.box {
+    box-sizing: border-box;
+    border: 1px solid #ed961f;
+    border-radius: 0.25rem;
+    margin: 3px;
+    padding: 5px;
+}
+
+#weather-parent-div, #location-parent-div {
+    position: relative;
+}
+
+#weather-div, #location-div {
+    display: none;
+    position: absolute;
+    min-width: 170px;
+    background-color: rgb(255, 255, 255, 0.7)
+}
+
+#search-input {
+    border-radius: 0.25rem
+}
+
+#search-container {
+    position: relative;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+#search-results-display {
+    display: none;
+    position: absolute;
+    overflow-y: auto; 
+    max-height:350px; 
+    margin: 2px;
+    border-radius: 0.25rem;
+    background-color: rgb(255, 255, 255, 0.7);
+}
+
+#search-results-display > div > a:hover {
+    color: #ed961f !important;
+}
+
+.overlay-bar-btn {
+    margin: 0px 5px;
+}
+
