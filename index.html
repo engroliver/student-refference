@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/suggest.css">
 </head>
 
 <body>
@@ -43,7 +44,10 @@
                     <img src="images/site-logo.png" height="32px" width="32px" />
                     <h1><strong>Site Historian</strong></h1>
                 </div>
-                <div class="fa-solid fa-map fa-2x icon-link" data-page="map"></div>
+                <div>
+                    <i class="fa-solid fa-comment fa-2x icon-link suggest-icon"></i>
+                    <i class="fa-solid fa-map fa-2x icon-link page-nav" data-page="map"></i>
+                </div>
             </nav>
             <div id="home-page-texts" class="mx-auto">
                 <div class="mt-5">
@@ -51,7 +55,7 @@
                     <p>Discover a random historic site, monument or museum in Singapore on <strong>this page</strong>,
                         or click on the <strong>map icon</strong> to explore all of them on an interactive map!</p>
                 </div>
-                <div class="mt-5 mb-3">
+                <div class="mt-3">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active tab-custom" id="nav-historic-site-tab" data-bs-toggle="tab"
@@ -99,14 +103,17 @@
                     <img src="images/site-logo.png" height="32px" width="32px" />
                     <h1><strong>Site Historian</strong></h1>
                 </div>
-                <div class="fa-solid fa-house fa-2x icon-link" data-page="home"></div>
+                <div>
+                    <i class="fa-solid fa-comment fa-2x icon-link suggest-icon"></i>
+                    <i class="fa-solid fa-house fa-2x icon-link page-nav" data-page="home"></i>
+                </div>
             </nav>
             <div id="map-container">
                 <div id="map"></div>
                 <div id="invisible-container"></div>
                 <div id="overlay-bar">
                     <div id="search-container" class="overlay-bar-btn">
-                        <input id="search-input" type="text" value="" placeholder="E.g. park or school" />
+                        <input id="search-input" class = "" type="text" value="" placeholder="E.g. park or school" />
                         <button id="search-btn" class="btn btn-custom"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <div id="search-results-display" class="box"></div>
@@ -178,6 +185,26 @@
             </div>
         </section>
         <!-- end of map page -->
+
+        <!--  -->
+        <section id="suggest-page" class="overlay hidden container-fluid">
+            <h5>Suggest a location to be included</h5>
+            <div>
+                <div class="mb-3">
+                    <label for="email-address" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email-address" placeholder="name@example.com">
+                  </div>
+                  <!-- <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div> -->
+            </div>
+            <div>
+                <button id="submit-btn" class="btn btn-custom">Submit</button>
+                <a href="#" class="btn btn-custom" id="back-to">Back</a>
+            </div>
+        </section>
+        <!--  -->
     </main>
     <!-- end of main content -->
 

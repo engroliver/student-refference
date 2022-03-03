@@ -157,6 +157,7 @@ function getDescData(data, featureNo, colNoArray) {
     }
 }
 
+// function to check if image url exists
 async function imageExists(url) {
     return new Promise((resolve, reject) => {
         let img = new Image();
@@ -346,5 +347,19 @@ function displayLocationDiv() {
     invisibleLayer.addEventListener('click', function () {
         locationDiv.style.display = 'none'
         invisibleLayer.style.display = 'none'
+    })
+}
+
+// function to enable and disable suggestion page/overlay
+function displaySuggestPage() {
+    let suggestPage = document.querySelector('#suggest-page');
+    suggestPage.classList.remove('hidden');
+    suggestPage.classList.add('show');
+    suggestPage.clientWidth;
+
+    let returnToMap = document.querySelector('#back-to');
+    returnToMap.addEventListener('click', function() {
+        suggestPage.classList.remove('show');
+        suggestPage.classList.add('hidden');
     })
 }

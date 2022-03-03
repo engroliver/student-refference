@@ -24,10 +24,6 @@
         right: 48px;
         top: 35px;
     }
-
-    .card-img-top {
-        width: 70% !important;
-    }
 }
 
 
@@ -96,7 +92,8 @@
 }
 
 #search-input {
-    border-radius: 0.25rem
+    border-radius: 0.25rem;
+    width: 250px;
 }
 
 #search-container {

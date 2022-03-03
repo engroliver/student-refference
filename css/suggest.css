@@ -1,0 +1,8 @@
+#suggest-page {
+    background-color: rgb(255, 255, 255, 0.85);
+    z-index: 314161;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -11,7 +11,7 @@ let weather2hLayer;
 let singleMarker;
 let locationMarker;
 
-const placeholderImgUrl = 'images/404.jpg' 
+const placeholderImgUrl = 'images/no-photo.png' 
 
 let resultsDisplay = document.querySelector('#search-results-display')
 let locationDiv = document.querySelector('#location-div')
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 })
 
 // event listener for single page application
-let iconLinks = document.querySelectorAll('.icon-link')
+let iconLinks = document.querySelectorAll('.page-nav')
 for (let link of iconLinks) {
     link.addEventListener('click', function(event) {
         let selectedLink = event.target;
@@ -74,6 +74,12 @@ for (let link of iconLinks) {
         page.classList.add('show');
         page.clientWidth;
     })
+}
+
+// event listener for suggestion page/overlay
+let suggestLink = document.querySelectorAll('.suggest-icon');
+for (let link of suggestLink) {
+    link.addEventListener('click', displaySuggestPage)
 }
 
 // event listener for sites layers control using radio buttons

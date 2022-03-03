@@ -40,5 +40,5 @@ The Historic Sites Finder app aims to provide the location and information on al
 
 ## Credits
 1. Data sources from www.data.gov.sg
-2. Icons made by Freepik and Pixel perfect from www.flaticon.com
+2. Icons made by Vectorslab, Freepik and Pixel perfect from www.flaticon.com
 3. CSS bounce animation https://css-tricks.com/making-css-animations-feel-natural/

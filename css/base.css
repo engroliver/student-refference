@@ -14,6 +14,11 @@ body {
     position: relative;
 }
 
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ed961f;
+  }
+
 .btn-custom {
     color: white;
     border-color: #fff4dd;
@@ -44,7 +49,7 @@ body {
 
 .icon-link {
     color: #73472f;
-    margin: 5px 0px;
+    margin: 5px 5px;
 }
 
 .icon-link:hover {
@@ -65,7 +70,7 @@ body {
     100% { transform: scale(1,1)      translateY(0); }
 }
 
-.page {
+.page, .overlay {
     height: 100vh;
     width: 100%;
     padding: auto;
