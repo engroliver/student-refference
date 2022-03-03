@@ -1,18 +1,32 @@
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     #search-input {
-        width: 140px;
+        width: 170px;
     }
     
     #overlay-bar {
         top: 8px;
         left: auto !important;
-        right: 8px;
+        right: 4px;
         flex-direction: column;
         align-items: flex-end;
     }
 
     .overlay-bar-btn {
         margin-bottom: 5px!important;
+    }
+
+    #weather-div, #location-div {
+        right: 51px;
+        top: 0px;
+    }
+
+    #search-results-display {
+        right: 48px;
+        top: 35px;
+    }
+
+    .card-img-top {
+        width: 70% !important;
     }
 }
 
@@ -104,7 +118,7 @@ body {
 }
 
 .card-img-top {
-    width: 70%;
+    width: 50%;
 }
 
 .card-title {
@@ -196,6 +210,7 @@ body {
 }
 
 #search-container {
+    position: relative;
     box-sizing: border-box;
     white-space: nowrap;
 }
