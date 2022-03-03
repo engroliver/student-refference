@@ -54,6 +54,9 @@
                     <h3>Dive deep into the history of Singapore</h3>
                     <p>Discover a random historic site, monument or museum in Singapore on <strong>this page</strong>,
                         or click on the <strong>map icon</strong> to explore all of them on an interactive map!</p>
+                    <p>You may also suggest new historic sites to be added to the application by clicking on the
+                        <strong>speech bubble icon</strong>.
+                    </p>
                 </div>
                 <div class="mt-3">
                     <nav>
@@ -113,7 +116,7 @@
                 <div id="invisible-container"></div>
                 <div id="overlay-bar">
                     <div id="search-container" class="overlay-bar-btn">
-                        <input id="search-input" class = "" type="text" value="" placeholder="E.g. park or school" />
+                        <input id="search-input" class="" type="text" value="" placeholder="E.g. park or school" />
                         <button id="search-btn" class="btn btn-custom"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <div id="search-results-display" class="box"></div>
@@ -189,15 +192,36 @@
         <!--  -->
         <section id="suggest-page" class="overlay hidden container-fluid">
             <h5>Suggest a location to be included</h5>
-            <div>
-                <div class="mb-3">
+            <div id="suggest-form">
+                <div class="mb-2">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="John Doe">
+                </div>
+                <div class="mb-2">
                     <label for="email-address" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="email-address" placeholder="name@example.com">
+                </div>
+                <div class="mb-2">
+                    <label for="location-name" class="form-label">Name of Location</label>
+                    <input type="text" class="form-control" id="location-name">
+                </div>
+                <div class="row">
+                    <label class="form-label">Coordinates</label>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Latitude">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Longitude">
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="suggest-desc" class="form-label">Description of Location</label>
+                    <textarea class="form-control" id="suggest-desc" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="suggest-img" class="form-label">Image</label>
+                    <input class="form-control" id="suggest-img" type="file">
                   </div>
-                  <!-- <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </div> -->
             </div>
             <div>
                 <button id="submit-btn" class="btn btn-custom">Submit</button>

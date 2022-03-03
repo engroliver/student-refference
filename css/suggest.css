@@ -6,3 +6,7 @@
     align-items: center;
     justify-content: center;
 }
+
+#suggest-form {
+    min-width: 300px;
+}

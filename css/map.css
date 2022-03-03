@@ -93,7 +93,7 @@
 
 #search-input {
     border-radius: 0.25rem;
-    width: 250px;
+    width: 200px;
 }
 
 #search-container {
@@ -120,3 +120,13 @@
     margin: 0px 5px;
 }
 
+.form-check-input:checked {
+    background-color: #ed961f;
+    border-color: #ed961f;
+    
+}
+
+.form-check-input:checked, .form-check-input:focus {
+    box-shadow: 0 0 8px rgba(237, 150, 31, 1) !important;
+    border-color: #fff4dd;
+}
