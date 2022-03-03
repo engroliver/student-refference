@@ -49,7 +49,7 @@
                     <p>Discover a random historic site, monument or museum in Singapore on <strong>this page</strong>,
                         or click on the <strong>map icon</strong> to explore all of them on an interactive map!</p>
                 </div>
-                <div class="my-3">
+                <div class="mt-5 mb-3">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active tab-custom" id="nav-historic-site-tab" data-bs-toggle="tab"
@@ -102,15 +102,15 @@
             <div id="map-container">
                 <div id="map"></div>
                 <div id="invisible-container"></div>
-                <div id="control-bar">
-                    <div id="search-container" class="control-bar-btn">
+                <div id="overlay-bar">
+                    <div id="search-container" class="overlay-bar-btn">
                         <input id="search-input" type="text" value="" placeholder="E.g. park or school" />
                         <button id="search-btn" class="btn btn-custom"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <div id="search-results-display" class="box"></div>
                     </div>
-                    <div>
-                        <button id="location-btn" class="btn btn-custom control-bar-btn"><i
+                    <div id="location-parent-div">
+                        <button id="location-btn" class="btn btn-custom overlay-bar-btn"><i
                                 class="fa-solid fa-location-dot"></i></i></button>
                         <div id="location-div" class="box">
                             <div id="radio-buttons">
@@ -151,8 +151,8 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button id="weather-btn" class="btn btn-custom control-bar-btn"><i
+                    <div id="weather-parent-div">
+                        <button id="weather-btn" class="btn btn-custom overlay-bar-btn"><i
                                 class="fa-solid fa-cloud"></i></i></button>
                         <div id="weather-div" class="box">
                             <div>
