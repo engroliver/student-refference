@@ -20,6 +20,7 @@
 
 .card-img-top {
     width: 60%;
+    max-width: 350px;
 }
 
 .card-title {

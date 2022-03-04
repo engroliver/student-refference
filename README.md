@@ -1,5 +1,5 @@
 # Historic Sites Finder
-Live link to the deployed website: 
+Access the live demo of the website [here](https://nanometre.github.io/historic-site-finder-tgc-proj1/#).
 
 ## Data Sources
 1. Singapore Historic Sites 
