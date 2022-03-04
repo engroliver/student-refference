@@ -17,6 +17,7 @@ let resultsDisplay = document.querySelector('#search-results-display')
 let locationDiv = document.querySelector('#location-div')
 let weatherDiv = document.querySelector('#weather-div')
 let invisibleLayer = document.querySelector('#invisible-container')
+let formMessageDisplay = document.querySelector('#form-message-display')
 
 // the col number is based on table data from the geojson file
 const nameDescImgCol = {
@@ -100,6 +101,13 @@ locationCheckbox.addEventListener('change', locationMarkerControl)
 let searchBtn = document.querySelector('#search-btn')
 searchBtn.addEventListener('click', displayAllSearchResults)
 
+let searchInput = document.querySelector('#search-input')
+searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        displayAllSearchResults()
+    }
+})
+
 // event listener to reset map
 let resetBtn = document.querySelector('#reset-map')
 resetBtn.addEventListener('click', clearAllLayers)
@@ -108,7 +116,17 @@ resetBtn.addEventListener('click', clearAllLayers)
 let weatherBtn = document.querySelector('#weather-btn')
 weatherBtn.addEventListener('click', displayWeatherDiv)
 
-// // event listener to open control layer div
+// event listener to open control layer div
 let siteBtn = document.querySelector('#location-btn')
 siteBtn.addEventListener('click', displayLocationDiv)
+
+// event listener to submit suggestion
+let suggestBtn = document.querySelector('#suggest-btn');
+suggestBtn.addEventListener('click', function(){
+    formMessageDisplay.style.display = 'block'
+    formMessageDisplay.innerHTML = `
+    <div class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div>`
+})
 

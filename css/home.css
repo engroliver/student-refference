@@ -31,7 +31,7 @@
     border-color: #fff4dd;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link.focus {
     color: #ed961f!important;
     border-color: #ed961f!important;
 }

@@ -23,6 +23,7 @@
     #search-results-display {
         right: 48px;
         top: 35px;
+        width: 240px;
     }
 }
 
@@ -33,7 +34,7 @@
 
 /* height to be adjusted */
 #map {
-    height: 94vh;
+    height: 93vh;
 }
 
 .leaflet-container {
@@ -110,6 +111,10 @@
     margin: 2px;
     border-radius: 0.25rem;
     background-color: rgb(255, 255, 255, 0.7);
+}
+
+#search-results-display > div > a {
+    overflow-wrap: normal;
 }
 
 #search-results-display > div > a:hover {

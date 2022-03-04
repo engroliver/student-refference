@@ -12,6 +12,7 @@ body {
 
 #all-pages {
     position: relative;
+    height: 100vh
 }
 
 .form-control:focus {
@@ -71,11 +72,12 @@ body {
 }
 
 .page, .overlay {
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    padding: auto;
+    margin: auto;
     box-sizing: border-box;
     position: absolute;
+    overflow-y: scroll;
 }
 
 .show {
