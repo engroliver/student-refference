@@ -41,4 +41,5 @@ The Historic Sites Finder app aims to provide the location and information on al
 ## Credits
 1. Data sources from www.data.gov.sg
 2. Icons made by Vectorslab, Freepik and Pixel perfect from www.flaticon.com
-3. CSS bounce animation https://css-tricks.com/making-css-animations-feel-natural/
+3. CSS bounce animation from https://css-tricks.com/making-css-animations-feel-natural/
+4. Regular expression syntax for coordinates from https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates

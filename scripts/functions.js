@@ -363,3 +363,69 @@ function displaySuggestPage() {
         suggestPage.classList.add('hidden');
     })
 }
+
+// function to check suggestion form radio buttons
+function checkSuggestRadios() {
+    let suggestRadios = document.querySelectorAll('.suggest-radios')
+    let selected = false
+
+    for (let radio of suggestRadios) {
+        if (radio.checked == true) {
+            selected = true
+            break
+        }
+    }
+    return selected
+}
+
+// function to add error messages
+function addErrorMsg(ul, msg) {
+    let errorElement = document.createElement('li')
+    errorElement.innerHTML = msg
+    ul.appendChild(errorElement)
+}
+
+// function for suggestion form submission
+function suggestSubmit() {
+    formMessageDisplay.style.display = 'block'
+    formMessageDisplay.innerHTML = ''
+
+    let suggestLocationName = document.querySelector('#suggest-location-name').value
+    let suggestLat = document.querySelector('#suggest-lat').value
+    let suggestLng = document.querySelector('#suggest-lng').value
+    let rgexLat = /^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/
+    let rgexLng = /^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/
+
+    let formError = false
+    let errorDiv = document.createElement('div')
+    let unorderedList = document.createElement('ul')
+    errorDiv.append(unorderedList)
+    errorDiv.classList.add('alert', 'alert-danger', 'p-1', 'm-1')
+
+    if (!suggestLocationName) {
+        formError = true
+        addErrorMsg(unorderedList, 'Enter the location name')
+    }
+
+    if (!checkSuggestRadios()) {
+        formError = true
+        addErrorMsg(unorderedList, 'Select a location type')
+    }
+
+    if (!suggestLat || !suggestLng) {
+        formError = true
+        addErrorMsg(unorderedList, 'Enter the coordinates')
+    } else if (!rgexLat.test(suggestLat) || ! rgexLng.test(suggestLng)) {
+        formError = true
+        addErrorMsg(unorderedList, 'Enter a valid coordinates')
+    }
+
+    if (formError) {
+        formMessageDisplay.append(errorDiv)
+    } else {
+        formMessageDisplay.innerHTML = 
+            `<div class="alert alert-success p-1 m-1">
+                Suggestion received!
+             </div>`
+    }
+}

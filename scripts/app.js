@@ -11,7 +11,7 @@ let weather2hLayer;
 let singleMarker;
 let locationMarker;
 
-const placeholderImgUrl = 'images/no-photo.png' 
+const placeholderImgUrl = 'images/no-photo.png'
 
 let resultsDisplay = document.querySelector('#search-results-display')
 let locationDiv = document.querySelector('#location-div')
@@ -55,13 +55,13 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     getRandomLocation(historicSiteData, nameDescImgCol.historic, "site")
     getRandomLocation(monumentData, nameDescImgCol.monument, "monument")
-    getRandomLocation(museumData, nameDescImgCol.museum, "museum") 
+    getRandomLocation(museumData, nameDescImgCol.museum, "museum")
 })
 
 // event listener for single page application
 let iconLinks = document.querySelectorAll('.page-nav')
 for (let link of iconLinks) {
-    link.addEventListener('click', function(event) {
+    link.addEventListener('click', function (event) {
         let selectedLink = event.target;
         let pageName = selectedLink.dataset.page;
 
@@ -122,11 +122,5 @@ siteBtn.addEventListener('click', displayLocationDiv)
 
 // event listener to submit suggestion
 let suggestBtn = document.querySelector('#suggest-btn');
-suggestBtn.addEventListener('click', function(){
-    formMessageDisplay.style.display = 'block'
-    formMessageDisplay.innerHTML = `
-    <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
-    </div>`
-})
+suggestBtn.addEventListener('click', suggestSubmit)
 

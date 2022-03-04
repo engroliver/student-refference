@@ -189,28 +189,31 @@
 
         <!--  -->
         <section id="suggest-page" class="overlay hidden container-fluid">
-            <h5 class="my-3">Suggest a location to be included</h5>
-            <div id="suggest-form">
-                <div class="mb-2">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control form-control-sm" id="suggest-name" placeholder="John Doe">
-                </div>
-                <div class="mb-2">
-                    <label for="email-address" class="form-label">Email address</label>
-                    <input type="email" class="form-control form-control-sm" id="suggest-email-address"
-                        placeholder="name@example.com">
-                </div>
+            <h5 class="my-3">Help to expand our database by suggesting a location to be included!</h5>
+            <div id="suggest-form mb-2">
                 <div class="mb-2">
                     <label for="location-name" class="form-label">Name of Location</label>
                     <input type="text" class="form-control form-control-sm" id="suggest-location-name">
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Type of Location</label>
-                    <select class="form-select form-control form-control-sm">
-                        <option>Small select</option>
-                        <option>Small select</option>
-                        <option>Small select</option>
-                      </select>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input suggest-radios" type="radio" name="suggest-radios" id="suggest-radio-1"
+                                value="historic-site">
+                            <label class="form-check-label" for="suggest-radio-1">Historic Site</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input suggest-radios" type="radio" name="suggest-radios" id="suggest-radio-2"
+                                value="monument">
+                            <label class="form-check-label" for="suggest-radio-2">Monument</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input suggest-radios" type="radio" name="suggest-radios" id="suggest-radio-3"
+                                value="radio">
+                            <label class="form-check-label" for="suggest-radio-3">Museum</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row mb-2">
                     <label class="form-label">Coordinates</label>
@@ -222,16 +225,16 @@
                     </div>
                 </div>
                 <div class="mb-2">
-                    <label for="suggest-desc" class="form-label">Description of Location</label>
+                    <label for="suggest-desc" class="form-label">Description of Location (optional)</label>
                     <textarea class="form-control form-control-sm" id="suggest-desc" rows="3"></textarea>
                 </div>
                 <div class="mb-2">
-                    <label for="suggest-img" class="form-label">Image of Location</label>
+                    <label for="suggest-img" class="form-label">Image of Location (optional)</label>
                     <input class="form-control form-control-sm" id="suggest-img" type="file">
                 </div>
             </div>
-            <div class="mb-2" id="form-message-display">
-                
+            <div id="form-message-display">
+
             </div>
             <div>
                 <button id="suggest-btn" class="btn btn-custom">Submit</button>

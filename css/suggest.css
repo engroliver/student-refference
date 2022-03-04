@@ -5,13 +5,21 @@
 }
 
 #suggest-page {
-    background-color: rgb(255, 255, 255, 0.85);
+    background-color: rgb(255, 255, 255, 0.9);
     z-index: 314161;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#suggest-page > h5 {
+    text-align: center;
+}
+
 #suggest-form {
     min-width: 300px;
+}
+
+#form-message-display > div > ul {
+    margin: 5px;
 }
