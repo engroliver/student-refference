@@ -1,3 +1,9 @@
+@media screen and (max-width: 480px) {
+    .card-img-top {
+        width: 100% !important;
+    }
+}
+
 @media screen and (max-width: 768px) {
     #home-page-texts {
         width: 100% !important;
@@ -19,8 +25,7 @@
 }
 
 .card-img-top {
-    width: 60%;
-    max-width: 350px;
+    width: 70%;
 }
 
 .card-title {

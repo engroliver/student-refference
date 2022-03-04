@@ -51,7 +51,7 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
             let desc = columns[colNoArray[1]].innerHTML;
             let img = columns[colNoArray[2]].innerHTML;
             let popupText = `
-            <p><strong>${name}</strong></p>
+            <p><span>${name}</span></p>
             <p>${desc}</p>
             <img src="${img}" class="center" width="70%" display:block/>`
             marker.bindPopup(popupText)
@@ -77,8 +77,8 @@ function loadWeather2hLayer(data) {
         } else {
             marker = L.marker([lat, lng], { icon: cloudyIcon });
         }
-        marker.bindPopup(`<p><strong>Area</strong>: ${forecast[i].area}</p>
-                          <p><strong>Forecast</strong>: ${forecast[i].forecast}</p>`)
+        marker.bindPopup(`<p><span>Area</span>: ${forecast[i].area}</p>
+                          <p><span>Forecast</span>: ${forecast[i].forecast}</p>`)
         marker.addTo(group);
     }
     return group;
@@ -132,7 +132,7 @@ function flyToAndPopup(coord, icon, name, desc, img) {
     singleMarker = L.marker(coord, { icon: icon });
 
     let popupText = `
-    <p><strong>${name}</strong></p>
+    <p><span>${name}</span></p>
     <p>${desc}</p>
     <img src="${img}" class="center" width="70%" display:block/>`
 
