@@ -416,7 +416,7 @@ function suggestSubmit() {
         addErrorMsg(unorderedList, 'Enter the coordinates')
     } else if (!rgexLat.test(suggestLat) || ! rgexLng.test(suggestLng)) {
         formError = true
-        addErrorMsg(unorderedList, 'Enter a valid coordinates')
+        addErrorMsg(unorderedList, 'Enter a valid coordinate')
     }
 
     if (formError) {
