@@ -43,7 +43,6 @@ function loadGeoJsonLayer(data, layerIcon, colNoArray) {
     let group = L.markerClusterGroup();
     L.geoJson(data, {
         'onEachFeature': function (feature, marker) {
-            // marker.bindPopup(feature.properties.Description);
             let dummyDiv = document.createElement('div');
             dummyDiv.innerHTML = feature.properties.Description;
             let columns = dummyDiv.querySelectorAll('td');
@@ -124,7 +123,7 @@ function getLocation() {
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min) + min); 
 }
 
 function flyToAndPopup(coord, icon, name, desc, img) {
