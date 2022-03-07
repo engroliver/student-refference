@@ -9,11 +9,11 @@ The live demo to the website can be accessed [here](https://nanometre.github.io/
 
 ### Project Context
 
-The Heritage Bank is a mobile-responsive web application with an interactive map that allows users to explore the various heritage sites scattered across Singapore. The information of the heritage sites are currently retrieved from Data.gov.sg.
+The Heritage Bank is a mobile-responsive web application with an interactive map that allows users to explore the various heritage sites scattered across Singapore. The information of the heritage sites is currently retrieved from Data.gov.sg.
 
 ### Target Audience
 
-The target audiences are the locals and tourists. The characteristics (e.g. age, occupation, educational level, IT literacy level) of the target audiences cover a wide spectrum, hence, the web application has to be easy to use and intuitive to achieve its goal. 
+The target audiences are the locals and tourists. The characteristics (e.g., age, occupation, educational level, IT literacy level) of the target audiences cover a wide spectrum, hence, the web application must be easy to use and intuitive to achieve its goal. 
 
 ### Organisational Goals
 
@@ -25,7 +25,7 @@ The users of the web application want to know more about the history of Singapor
 
 ### Justification for the App
 
-To discover heritage sites, users would currently have to do an internet search which return countless articles on the various heritage sites in Singapore. The articles are wordy and it can take the users some effort to find the location of the heritage sites. The web application provides a convenient way to discover these heritage sites on an interactive map and to provide other useful features to aid users to plan a visit if they would like to.
+To discover heritage sites, users would currently have to do an internet search which return countless articles on the various heritage sites in Singapore. The articles are wordy, and it can take the users some effort to find the location of the heritage sites. The web application provides a convenient way to discover these heritage sites on an interactive map and to provide other useful features to aid users to plan a visit if they would like to.
 
 
 ## UI/UX
@@ -40,7 +40,7 @@ To discover heritage sites, users would currently have to do an internet search 
 
 * Needs: An easy way to know more about heritage sites in Singapore and where to find them.
 
-* Demographic: The characteristics (e.g. age, occupation, educational level and IT literacy level) of the users cover a wide spectrum. Any user that is interested in knowing more about the history of Singapore is a target audience. Therefore, the web application should be simple to use and intuitive.
+* Demographic: The characteristics (e.g., age, occupation, educational level and IT literacy level) of the users cover a wide spectrum. Any user that is interested in knowing more about the history of Singapore is a target audience. Therefore, the web application should be simple to use and intuitive.
 
 * Pain point: Information that are currently available online are wordy and location of the heritage sites can take some effort to find.
 
@@ -78,25 +78,26 @@ Content
 <br>
 
 ### Skeleton
-The wireframes for mobile and laptop display for the web application can be accessed [here](https://nanometre.github.io/historic-site-finder-tgc-proj1/images/readme-images/skeleton.pdf)
+The wireframes for mobile and laptop display for the web application can be accessed [here](https://nanometre.github.io/historic-site-finder-tgc-proj1/images/readme-images/skeleton.pdf).
 
 ### Surface
 **Colours**: As the web application revolves around the history of Singapore, the colour scheme of brown, yellow and white is used to replicate the sepia toning commonly found in photographs of olden Singapore. Contrasting font colours are used to make it easier for users to read.
+
 <img src='./images/readme-images/colour-palette.png' style='display:block'>
 <br>
 
 **Font Choice**: San-serif fonts are used for its legibility and readability. 
 
-**Icons and Markers**: With the exception of the weather markers and icons, the colours of all icons and markers are selected to match the colour scheme of the web application for uniformity. Blue have been selected for the weather markers and icons as it is generally associated with the sky.
+**Icons and Markers**: Excpet for the weather markers and icons, the colours of all icons and markers are selected to match the colour scheme of the web application for uniformity. Blue have been selected for the weather markers and icons as it is generally associated with the sky.
 
 ## Features
 Features | Descriptions
 -------- | -------------
-Generate random heritage sites | This feature generates a random historic site, monument and museum each time the page reloads. The 'Show on Map' button located at the bottom of the page will direct users to the map page and zoom in to the location. It would potentially allow users to discover new sites that they were unaware about. The feature is implemented by generating a random number then accessing the specific entry in the data using the randomly generated number. 
-Search for heritage sites by name | This feature allows users to search for any heritage sites by it's name. The feature is implemented using the ```filter()``` method.
+Generate random heritage sites | This feature generates a random historic site, monument, and museum each time the page reloads. The 'Show on Map' button located at the bottom of the page will direct users to the map page and zoom in to the location. It would potentially allow users to discover new sites that they were unaware about. The feature is implemented by generating a random number then accessing the specific entry in the data using the randomly generated number. 
+Search for heritage sites by name | This feature allows users to search for any heritage sites by its name. The feature is implemented using the ```filter()``` method.
 Display heritage sites layers on the map| This feature allows users to show or hide the layers they would prefer to see. Only one heritage site layer would be visible to avoid cluttering of the map.
 Display weather forecast | This feature allows users to check the 2h and 24h weather forecast, making it convenient for users to plan a spontaneous or day trip to a heritage site.
-Display information of location by clicking on marker | Clicking on the location or weather markers display the information about the location. The location marker would shows the name, description and an image. While the weather marker would show the name of area and the nowcast.
+Display information of location by clicking on marker | Clicking on the location or weather markers display the information about the location. The location marker would show the name, description and an image. While the weather marker would show the name of area and the nowcast.
 Show current location of user| After agreeing the web application to track their current location, users can enable the layer to show their current location on the map.
 Reset map by removing all markers | This feature allows users to clear the map of all markers and restart from a cleared map.
 Suggestion page | This feature allows users to submit a suggestion to the database. The suggestion form has form validation which would prompt users when invalid input is submitted. However, this feature is a work in progress as there is no backend to handle the submission request.
@@ -105,8 +106,8 @@ Suggestion page | This feature allows users to submit a suggestion to the databa
 Limitations | Future Implementations to Resolve Limitations
 ----------- | -------------
 Search function is limited to searching by name of the site and the search terms cannot have spelling errors. | Create a more comprehensive search function (allow searches through address, type of sites, etc) and to account for search terms that are misspelt.
-Some images URL provided by the data sources does not exist and would redirect the browser to an error page. To check if the image URL exists, a promise is used on each image URL. When there is a bunch of image URLs to check, the operation will take awhile to complete as the promise will wait for the response of one image URL before moving to the next. Hence, slowing down certain functions of the application. | Create a better method to check if the img URLs exist.
-As mentioned in the previous section, there is no backend to handle the submission request. | Create a complete web application which is able to handle the submission request and a database to store all the existing and new site entries.
+Some images URL provided by the data sources does not exist and would redirect the browser to an error page. To check if the image URL exists, a promise is used on each image URL. When there is a bunch of image URLs to check, the operation will take some time to complete as the promise will wait for the response of one image URL before moving to the next. Hence, slowing down certain functions of the application. | Create a better method to check if the image URLs exist.
+As mentioned in the previous section, there is no backend to handle the submission request. | Create a complete web application which can handle the submission request and a database to store all the existing and new site entries.
 The web application only shows the current location of the user and the other markers on the map. With a routing function, more value can be added to the users. | Create a routing function to allow users to plot a route between their current location and their point of interest.
 
 
@@ -153,6 +154,9 @@ The test cases can be found [here](https://nanometre.github.io/historic-site-fin
 11. [Am I Responsive?](http://ami.responsivedesign.is/)
     - To display screen responsiveness across multiple devices.
 
+12. [GitHub Pages](https://pages.github.com/)
+    - For the deployment of this web application.
+
 
 ## Deployment
 The web application is hosted on [GitHub Pages](https://pages.github.com/)
@@ -160,9 +164,10 @@ The web application is hosted on [GitHub Pages](https://pages.github.com/)
 **Steps to deploy web application on GitHub Pages**
 1. On GitHub, navigate to the site's repository.
 2. Under the repository name click on Settings.
-3. Under "GitHub Pages" section, use the None or Branch drop-down menu and select a publishing source. For this web application, select **main**.
-4. Optionally, use the drop-down menu to select a folder for the publishing source.
-5. Click Save.
+3. In the "Code and automation" section of the sidebar, click on Pages.
+4. Under "GitHub Pages" section, use the None or Branch drop-down menu and select a publishing source. For this web application, select **main**.
+5. Optionally, use the drop-down menu to select a folder for the publishing source.
+6. Click Save.
 
 
 ## Credits
