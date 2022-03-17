@@ -4,6 +4,7 @@
 
 The live demo to the website can be accessed [here](https://nanometre.github.io/historic-site-finder-tgc-proj1/#).
 
+*Note: This is a bootcamp project where a web application was created with interactive elements (implemented with JavaScript). Main technologies used are Bootstrap, CSS, HTML and JavaScript*
 
 ## Project Summary
 
